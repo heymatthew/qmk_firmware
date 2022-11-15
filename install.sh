@@ -24,7 +24,7 @@ case $1 in
     ploopy)
         # https://github.com/ploopyco/mouse/wiki/Appendix-D%3A-QMK-Firmware-Programming
         echo "Plug in mouse while holding 'back' button..."
-        make ploopyco/trackball:default:flash
+        make ploopyco/trackball:heymatthew:flash
         ;;
 
     *)

@@ -19,12 +19,13 @@
 
 // safe range starts at `PLOOPY_SAFE_RANGE` instead.
 
+// Keycodes documented here: https://docs.qmk.fm/#/keycodes
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT( /* Base */
         KC_BTN1,
         KC_BTN3,
         KC_BTN2,
-        LSFT(KC_BTN1), // shift click
-        KC_BTN5
+        KC_RIGHT_GUI, // right gui (Windows/Command/Meta key)
+        KC_RIGHT_SHIFT // right shift
     ),
 };

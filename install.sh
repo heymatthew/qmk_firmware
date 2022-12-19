@@ -8,7 +8,7 @@ case $1 in
     planck)
         # https://github.com/yanghu/qmk_firmware/tree/master/keyboards/planck
         echo "Please flip planck, hold reset, and plug in to flash..."
-        # make planck/rev6_drop:default:flash
+        # make planck/rev6_drop:default:build
         make planck/rev6_drop:heymatthew:flash
         ;;
 

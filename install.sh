@@ -16,12 +16,10 @@ case $1 in
         # FIXME explodes with errors
         # https://github.com/yanghu/qmk_firmware/tree/master/keyboards/crkbd
         echo "Please press reset on first half..."
-        # make crkbd/rev1:heymatthew:build
-        make crkbd/rev1:default:build
+        make crkbd/rev1:heymatthew:flash
 
         echo "Please press reset on second half..."
-        # make crkbd/rev1:heymatthew:build
-        make crkbd/rev1:default:build
+        make crkbd/rev1:heymatthew:flash
         ;;
 
     ploopy)

@@ -28,20 +28,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                   |--------+--------+--------+--------+--------+--------|
       KC_LALT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                        KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(1), KC_SPC,    KC_LSFT,   MO(2), KC_RCTL
+                                          KC_LGUI,   TT(1), KC_SPC,    KC_LSFT,   TT(2), KC_RCTL
                                       //`--------------------------' `--------------------------'
 
   ),
 
   [1] = LAYOUT_split_3x6_3( // LOWER TODO integrate mouse
   //,-----------------------------------------------------.                   ,-----------------------------------------------------.
-       KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
+      KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                   |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_VOLD, KC_VOLU, KC_MPRV, KC_MPLY, KC_MNXT,                     XXXXXXX, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
   //|--------+--------+--------+--------+--------+--------|                   |--------+--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______, KC_SPC,    KC_LSFT,   MO(3), KC_RCTL
+                                          KC_LGUI, _______, KC_SPC,    KC_LSFT,   TT(3), KC_RCTL
                                       //`--------------------------' `--------------------------'
   ),
 
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                   |--------+--------+--------+--------+--------+--------|
         KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(3), KC_SPC,    KC_LSFT, _______, KC_RCTL
+                                          KC_LGUI,   TT(3), KC_SPC,    KC_LSFT, _______, KC_RCTL
                                       //`--------------------------' `--------------------------'
   ),
 

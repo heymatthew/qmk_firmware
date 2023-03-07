@@ -102,9 +102,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | Next | Vol- | Vol+ | Play | Next |      |   _  |   +  |   {  |   }  |  |   |
+ * |      |Shift | GUI  |RClic |LClic |MClic |      |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |ISO ~ |ISO | | Home | End  |      |
+ * |      | Next | Vol- | Vol+ | Play | Next |      |ISO ~ |ISO | | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | PgDn | PgUp |      |      |             |      | End  | Home |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -112,10 +112,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Keycodes documented here: https://docs.qmk.fm/#/keycodes
 [_LOWER] = LAYOUT_planck_grid(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,    KC_ASTR,    KC_LPRN, KC_RPRN, KC_BSPC,
-    _______, KC_VOLD, KC_VOLU, KC_MPRV, KC_MPLY, KC_MNXT, _______, KC_UNDS,    KC_PLUS,    KC_LCBR, KC_RCBR, KC_PIPE,
-    _______, _______, _______, _______, _______, _______, _______, S(KC_NUHS), S(KC_NUBS), KC_HOME, KC_END,  _______,
+    _______, KC_RSFT, KC_LGUI, KC_BTN2, KC_BTN1, KC_BTN3, _______, KC_UNDS,    KC_PLUS,    KC_LCBR, KC_RCBR, KC_PIPE,
+    _______, KC_VOLD, KC_VOLU, KC_MPRV, KC_MPLY, KC_MNXT, _______, S(KC_NUHS), S(KC_NUBS), KC_HOME, KC_END,  _______,
     _______, KC_PGDN, KC_PGUP, _______, _______, _______, _______, _______,    KC_HOME,    KC_END, _______, _______
 ),
+
+
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.

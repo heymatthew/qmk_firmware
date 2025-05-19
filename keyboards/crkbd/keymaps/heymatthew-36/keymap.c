@@ -45,7 +45,7 @@ enum layers {
 #define NAV_TAB LT(L_NAV, KC_TAB)
 #define SYM_SPC LT(L_SYM, KC_SPC)
 #define FUN_ENT LT(L_FUN, KC_ENT)
-#define NUM_ESC LT(L_NUM, KC_ESC)
+#define NUM_BSP LT(L_NUM, KC_BSPC)
 
 // Shorthand
 #define ____ KC_TRNS       // Transparent
@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    GUI_A,   ALT_S,   CTL_D,   SFT_F,   KC_G,                          KC_H,    SFT_J,   CTL_K,   ALT_L,   GUI_SC,  XXXX,
         XXXX,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, XXXX,
     // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
-                                            XXXX,    SYM_SPC, NAV_TAB,     FUN_ENT, NUM_ESC, KC_BSPC
+                                            XXXX,    SYM_SPC, NAV_TAB,     FUN_ENT, NUM_BSP, KC_ESC
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [L_FUN] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_VOLU,                     XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
+        XXXX,    KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_VOLU,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
         XXXX,    KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_VOLD,                       XXXX,    KC_LSFT, KC_RGUI, KC_LALT, KC_RCTL, XXXX,
         XXXX,    KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_MUTE,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
     // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
@@ -115,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //           GUI A    ALT S    D CTRL    F SHIFT     G                            H        SHIFT J   CTRL K   ALT L   GUI ; :
   //             Z        X        C         V        B                             N          M      , and <  . and >  / and ?
   // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
-  //                                                SYM_SPC  NAV_TAB      FUN_ENT  NUM_ESC BACKSPCE
+  //                                                SYM_SPC  NAV_TAB      FUN_ENT  NUM_BSP    ESC
   //                                     +--------+--------+--------+   +--------+--------+--------+
 
   // L_SYM
@@ -125,6 +125,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                                                                                 %      \ or |     +        &         @
   // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
   //                                               [PUSH]                 ` or ~   ' or "
+  //                                     +--------+--------+--------+   +--------+--------+--------+
+
+  // L_SYM shifted
+  // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
+  //                     MOUSE 2  MOUSE 1                                            ^        !         *        #        $
+  //             GUI      ALT      CTRL    SHIFT    MOUSE 3                          _        (         )        {        }
+  //                                                                                 %        |         +        &        @
+  // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
+  //                                               [PUSH]                    ~       "
   //                                     +--------+--------+--------+   +--------+--------+--------+
 
   // L_NAV

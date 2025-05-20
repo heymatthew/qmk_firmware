@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_CIRC, KC_EXLM, KC_ASTR, KC_HASH, KC_DLR,  XXXX,
-        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_MINS, KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, XXXX,
+        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_MINS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, XXXX,
         XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_PERC, KC_BSLS, KC_PLUS, KC_AMPR, KC_AT,   XXXX,
     // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
                                             XXXX,    ____,    XXXX,        KC_GRV,  KC_QUOT, XXXX
@@ -120,8 +120,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   // L_SYM
   // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-  //                     MOUSE 2  MOUSE 1                                            ^        !         *      #        $
-  //             GUI      ALT      CTRL    SHIFT    MOUSE 3                        - or _     (         )      [ or {   ] or }
+  //                     MOUSE 2  MOUSE 1                                            ^        !         *       #         $
+  //             GUI      ALT      CTRL    SHIFT    MOUSE 3                        - or _   [ or {   ] or }     (         )
   //                                                                                 %      \ or |     +        &         @
   // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
   //                                               [PUSH]                 ` or ~   ' or "
@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // L_SYM shifted
   // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
   //                     MOUSE 2  MOUSE 1                                            ^        !         *        #        $
-  //             GUI      ALT      CTRL    SHIFT    MOUSE 3                          _        (         )        {        }
+  //             GUI      ALT      CTRL    SHIFT    MOUSE 3                          _        {         }        (        )
   //                                                                                 %        |         +        &        @
   // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
   //                                               [PUSH]                    ~       "

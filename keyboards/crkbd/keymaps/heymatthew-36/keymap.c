@@ -22,10 +22,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // see https://github.com/manna-harbour/miryoku/tree/master/docs/reference
 enum layers {
   L_BASE,
-  L_NAV,
-  L_NUM,
-  L_SYM,
-  L_FUN
+  L_NAVIGATION,
+  L_NUMBER,
+  L_SYMBOL,
+  L_FUNCTION
 };
 
 // Home Row Mod GACS
@@ -42,10 +42,10 @@ enum layers {
 
 // Thumb clusters
 // reference https://docs.qmk.fm/keycodes
-#define NAV_TAB LT(L_NAV, KC_TAB)
-#define SYM_SPC LT(L_SYM, KC_SPC)
-#define FUN_ENT LT(L_FUN, KC_ENT)
-#define NUM_BSP LT(L_NUM, KC_BSPC)
+#define NAV_TAB LT(L_NAVIGATION, KC_TAB)
+#define SYM_SPC LT(L_SYMBOL, KC_SPC)
+#define FUN_ENT LT(L_FUNCTION, KC_ENT)
+#define NUM_BSP LT(L_NUMBER, KC_BSPC)
 
 // Shorthand
 #define ____ KC_TRNS       // Transparent
@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 
-  [L_SYM] = LAYOUT_split_3x6_3(
+  [L_SYMBOL] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_CIRC, KC_EXLM, KC_ASTR, KC_HASH, KC_DLR,  XXXX,
         XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_MINS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, XXXX,
@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 
-  [L_NAV] = LAYOUT_split_3x6_3(
+  [L_NAVIGATION] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_REDO, KC_PSTE, KC_COPY, KC_CUT,  KC_UNDO, XXXX,
         XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, XXXX,
@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 
-  [L_FUN] = LAYOUT_split_3x6_3(
+  [L_FUNCTION] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_VOLU,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
         XXXX,    KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_VOLD,                       XXXX,    KC_LSFT, KC_RGUI, KC_LALT, KC_RCTL, XXXX,
@@ -99,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 
-  [L_NUM] = LAYOUT_split_3x6_3(
+  [L_NUMBER] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
         XXXX,    KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,                        XXXX,    KC_LSFT, KC_RGUI, KC_LALT, KC_RCTL, XXXX,
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                                                SYM_SPC  NAV_TAB      FUN_ENT  NUM_BSP    ESC
   //                                     +--------+--------+--------+   +--------+--------+--------+
 
-  // L_SYM
+  // L_SYMBOL
   // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
   //                     MOUSE 2  MOUSE 1                                            ^        !         *       #         $
   //             GUI      ALT      CTRL    SHIFT    MOUSE 3                        - or _   [ or {   ] or }     (         )
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                                               [PUSH]                 ` or ~   ' or "
   //                                     +--------+--------+--------+   +--------+--------+--------+
 
-  // L_SYM shifted
+  // L_SYMBOL shifted
   // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
   //                     MOUSE 2  MOUSE 1                                            ^        !         *        #        $
   //             GUI      ALT      CTRL    SHIFT    MOUSE 3                          _        {         }        (        )
@@ -136,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                                               [PUSH]                    ~       "
   //                                     +--------+--------+--------+   +--------+--------+--------+
 
-  // L_NAV
+  // L_NAVIGATION
   // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
   //                     MOUSE 2  MOUSE 1                                          REDO     PASTE     COPY    CUT       UNDO
   //             GUI      ALT      CTRL    SHIFT    MOUSE 3                        LEFT     DOWN      UP      RGHT     CAPS LCK
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                                     +--------+--------+--------+   +--------+--------+--------+
 
 
-  // L_FUN
+  // L_FUNCTION
   // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
   //            F12       F7,       F8,      F9,   VOL DOWN
   //            F11,      F4,       F5,      F6,   VOL UP                                  SHIFT    CTRL      ALT      GUI
@@ -155,7 +155,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                                      PREV      PLAY     NEXT         [PUSH]
   //                                     +--------+--------+--------+   +--------+--------+--------+
 
-  // L_NUM
+  // L_NUMBER
   // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
   //           [ or {   7 and &  8 and *  9 and (   ] or }
   //           ; and :  4 and $  5 and %  6 and ^   = and +                                 SHIFT    CTRL      ALT      GUI

@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum layers {
   L_BASE,
   L_NAVIGATION,
+  L_BRACKETS,
   L_NUMBER,
   L_SYMBOL,
   L_FUNCTION
@@ -51,6 +52,7 @@ enum layers {
 #define ____ KC_TRNS       // Transparent
 #define XXXX KC_NO         // NOOP
 #define KC_REDO KC_AGIN    // Pairs with UNDO
+#define MO_BRAC MO(L_BRACKETS)
 
 // Miryoku-inspired layout with the following variations
 // * QWERTY base layer (vim muscle memory)
@@ -72,10 +74,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_SYMBOL] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_CIRC, KC_EXLM, KC_ASTR, KC_HASH, KC_DLR,  XXXX,
-        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_MINS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, XXXX,
+        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, MO_BRAC, MS_BTN3,                       KC_MINS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, XXXX,
         XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_PERC, KC_BSLS, KC_PLUS, KC_AMPR, KC_AT,   XXXX,
     // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
                                             XXXX,    ____,    XXXX,        KC_GRV,  KC_QUOT, XXXX
+    //                                     +--------+--------+--------+   +--------+--------+--------+
+  ),
+
+  [L_BRACKETS] = LAYOUT_split_3x6_3(
+    // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
+        XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_CIRC, KC_EXLM, KC_ASTR, KC_HASH, KC_DLR,  XXXX,
+        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, ____,    MS_BTN3,                       KC_UNDS, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, XXXX,
+        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_PERC, KC_PIPE, KC_PLUS, KC_AMPR, KC_AT,   XXXX,
+    // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
+                                            XXXX,    ____,    XXXX,        KC_TILD, KC_DQUO, XXXX
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 
@@ -127,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                                               [PUSH]                 ` or ~   ' or "
   //                                     +--------+--------+--------+   +--------+--------+--------+
 
-  // L_SYMBOL shifted
+  // L_BRACKETS
   // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
   //                     MOUSE 2  MOUSE 1                                            ^        !         *        #        $
   //             GUI      ALT      CTRL    SHIFT    MOUSE 3                          _        {         }        (        )

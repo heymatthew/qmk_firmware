@@ -19,13 +19,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-// see https://github.com/manna-harbour/miryoku/tree/master/docs/reference
 enum layers {
   L_BASE,
-  L_NAVIGATION,
-  L_NUMBER,
+  L_NUM,
   L_SYM,
-  L_FUNCTION
 };
 
 // Home Row Mod GACS
@@ -36,18 +33,15 @@ enum layers {
 #define T_SFT MT(MOD_LSFT, KC_T)
 #define U_SFT MT(MOD_RSFT, KC_U)
 #define E_CTL MT(MOD_RCTL, KC_E)
-#define I_ALT MT(MOD_LALT, KC_I) // left hand alt to avoid macrons on osx
+#define I_ALT MT(MOD_LALT, KC_I) // uses left hand alt to avoid OSX macrons
 #define A_GUI MT(MOD_RGUI, KC_A)
-
-// Thumb clusters
-// reference https://docs.qmk.fm/keycodes
-#define NAV_TAB LT(L_NAVIGATION, KC_TAB)
-#define NUM_ENT LT(L_NUMBER, KC_ENT)
 
 // Shorthand
 #define ____ KC_TRNS       // Transparent
 #define XXXX KC_NO         // NOOP
 #define KC_REDO KC_AGIN    // Pairs with UNDO
+#define SYM_TAB LT(L_SYM, KC_TAB)
+#define NUM_ENT LT(L_NUM, KC_ENT)
 
 // BASE
 // xkcd layout https://sites.google.com/alanreiser.com/handsdown/home/more-variations
@@ -63,7 +57,7 @@ enum layers {
 // one handed mouse layer on left
 //  ╭─────────────────────╮          ╭─────────────────────╮ key, sft, alt
 //  │     mo2 mo1         │          │     &!  +@  #%  `~  │ sft+( = {
-//  │ gui alt ctl sft mo3 │          │ ^$  _-  ({[ )}] *=  │ alt+( = [
+//  │ gui alt ctl sft mo3 │          │ ^$  -_  ({[ )}] *=  │ alt+( = [
 //  │                     ╰───╮  ╭───╯     |\              │ mouse btns on left
 //  ╰───────────╮ ;:  spc ___ │  │ ent bsp esc ╭───────────╯
 //              ╰─────────────╯  ╰─────────────╯
@@ -71,88 +65,75 @@ enum layers {
 // NUM
 // arrows on left use alt, one handed media control on right
 //  ╭─────────────────────╮          ╭─────────────────────╮
-//  │ +*  7   8↑  9   ^%  │          │     vol ply prv nxt │ sft+1 = F1, sft+2 = F2...
-//  │ -/  4←  5↓  6→  $!  │          │ mut sft ctl alt gui │ sft+- = /
+//  │ +*  7   8↑  9   !%  │          │     vol ply prv nxt │ sft+1 = F1, sft+2 = F2...
+//  │ -/  4←  5↓  6→  ^$  │          │ mut sft ctl alt gui │ sft+- = /
 //  │ ({[ 1   2   3   )}] ╰───╮  ╭───╯     vol             │
 //  ╰───────────╮  .   0   =  │  │ ___ bsp esc ╭───────────╯
 //              ╰─────────────╯  ╰─────────────╯
 //                        sym     [num]
-//
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_BASE] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    KC_Q,    KC_M,    KC_H,    KC_G,    KC_Z,                          KC_Y,    KC_F,    KC_O,    KC_B,    KC_QUOT, XXXX,
         XXXX,    S_GUI,   N_ALT,   R_ALT,   T_SFT,   KC_P,                          KC_W,    U_SFT,   E_CTL,   I_ALT,   A_GUI,   XXXX,
         XXXX,    KC_X,    KC_K,    KC_C,    KC_D,    KC_J,                          KC_V,    KC_L,    KC_COMM, KC_DOT,  KC_SLSH, XXXX,
-                                            KC_SCLN, KC_SPC,  NAV_TAB,     NUM_ENT, KC_BSPC, KC_ESC
+                                            KC_SCLN, KC_SPC,  SYM_TAB,     NUM_ENT, KC_BSPC, KC_ESC
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
-
-  // SYM
-  // optimised on C symbol frequency https://stackoverflow.com/a/62766162/81271
-  // one handed mouse layer on left
-  //  ╭─────────────────────╮          ╭─────────────────────╮ key, sft, alt
-  //  │     mo2 mo1         │          │     &!  +@  #%  `~  │ sft+( = {
-  //  │ gui alt ctl sft mo3 │          │ ^$  _-  ({[ )}] *=  │ alt+( = [
-  //  │                     ╰───╮  ╭───╯     |\              │ mouse btns on left
-  //  ╰───────────╮ ;:  spc ___ │  │ ent bsp esc ╭───────────╯
-  //              ╰─────────────╯  ╰─────────────╯
-  //                       [sym]     num
-
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_CIRC, KC_EXLM, KC_ASTR, KC_HASH, KC_DLR,  XXXX,
-        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, XXXX,    MS_BTN3,                       KC_MINS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, XXXX,
-        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_PERC, KC_BSLS, KC_PLUS, KC_AMPR, KC_AT,   XXXX,
-                                            XXXX,    XXXX,    ____,        KC_GRV,  KC_QUOT, XXXX
+        XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          XXXX,    KC_AMPR, KC_PLUS, KC_HASH, KC_GRAVE, XXXX,
+        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_CIRC, KC_MINS, KC_LPRN, KC_RPRN, KC_ASTR,  XXXX,
+        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          XXXX,    KC_PIPE, XXXX,    XXXX,    XXXX,     XXXX,
+                                            ____,    ____,    XXXX,        ____,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
-
-  [L_NAVIGATION] = LAYOUT_split_3x6_3(
+  [L_NUM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_REDO, KC_PSTE, KC_COPY, KC_CUT,  KC_UNDO, XXXX,
-        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, XXXX,
-        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  XXXX,
-                                            XXXX,    XXXX,    ____,        XXXX,    XXXX,    XXXX
+        XXXX,    KC_PPLS, KC_KP_7, KC_KP_8, KC_KP_9, KC_EXLM,                       XXXX,    KC_VOLU, KC_MPLY, KC_MPRV, KC_MNXT, XXXX,
+        XXXX,    KC_PMNS, KC_KP_4, KC_KP_5, KC_KP_6, KC_CIRC,                       KC_MUTE, KC_LSFT, KC_RCTL, KC_LALT, KC_RGUI, XXXX,
+        XXXX,    KC_LPRN, KC_KP_1, KC_KP_2, KC_KP_3, KC_RPRN,                       XXXX,    KC_VOLD, XXXX,    XXXX,    XXXX,    XXXX,
+                                            KC_PDOT, KC_KP_0, KC_PEQL,     XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
-
-  [L_FUNCTION] = LAYOUT_split_3x6_3(
-    // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_VOLU,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
-        XXXX,    KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_VOLD,                       XXXX,    KC_LSFT, KC_RGUI, KC_LALT, KC_RCTL, XXXX,
-        XXXX,    KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_MUTE,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
-                                            KC_MPRV, KC_MPLY, KC_MNXT,     ____,    XXXX,    XXXX
-    //                                     +--------+--------+--------+   +--------+--------+--------+
-  ),
-
-  [L_NUMBER] = LAYOUT_split_3x6_3(
-    // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
-        XXXX,    KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,                        XXXX,    KC_LSFT, KC_RGUI, KC_LALT, KC_RCTL, XXXX,
-        XXXX,    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_SLSH,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
-                                            KC_DOT,  KC_0,    KC_MINS,     XXXX,    ____,    XXXX
-    //                                     +--------+--------+--------+   +--------+--------+--------+
-  ),
-
 };
 
-  //  ╭─────────────────────╮          ╭─────────────────────╮ key, sft, alt
-  //  │     mo2 mo1         │          │     &!  +@  #%  `~  │ sft+( = {
-  //  │ gui alt ctl sft mo3 │          │ ^$  _-  ({[ )}] *=  │ alt+( = [
-  //  │                     ╰───╮  ╭───╯     |\              │ mouse btns on left
-  //  ╰───────────╮ ;:  spc ___ │  │ ent bsp esc ╭───────────╯
-  //              ╰─────────────╯  ╰─────────────╯
-  //                       [sym]     num
-
 const key_override_t *key_overrides[] = {
-	&ko_make_basic(MOD_MASK_SHIFT, KC_BACKSPACE, KC_DELETE),             // sft+bsp = del
-	&ko_make_basic(MOD_MASK_SHIFT, KC_AMPERSAND, KC_EXCLAIM),            // sft+& = !
-	&ko_make_basic(MOD_MASK_SHIFT, KC_PLUS, KC_AT),                      // sft++ = @
-	&ko_make_basic(MOD_MASK_SHIFT, KC_HASH, KC_PERCENT),                 // sft+# = %
-	&ko_make_basic(MOD_MASK_SHIFT, KC_CIRCUMFLEX, KC_DOLLAR),            // sft+^ = $
-	&ko_make_basic(MOD_MASK_SHIFT, KC_LEFT_PAREN, KC_LEFT_CURLY_BRACE)   // sft+( = {
+	&ko_make_basic(MOD_MASK_SHIFT, KC_BACKSPACE, KC_DELETE),       // sft+bsp = del
+
+  // SYM
+	&ko_make_basic(MOD_MASK_SHIFT, KC_AMPR, KC_EXCLAIM),           // sft+& = !
+	&ko_make_basic(MOD_MASK_SHIFT, KC_PLUS, KC_AT),                // sft++ = @
+	&ko_make_basic(MOD_MASK_SHIFT, KC_HASH, KC_PERCENT),           // sft+# = %
+	&ko_make_basic(MOD_MASK_SHIFT, KC_CIRC, KC_DOLLAR),            // sft+^ = $
+	&ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_LEFT_CURLY_BRACE),  // sft+( = {
+	&ko_make_basic(MOD_MASK_ALT,   KC_LPRN, KC_LEFT_BRACKET),      // alt+( = [
+	&ko_make_basic(MOD_MASK_SHIFT, KC_RPRN, KC_RIGHT_CURLY_BRACE), // sft+) = }
+	&ko_make_basic(MOD_MASK_ALT,   KC_RPRN, KC_RIGHT_BRACKET),     // alt+) = ]
+	&ko_make_basic(MOD_MASK_SHIFT, KC_ASTR, KC_EQUAL),             // sft+* = =
+	&ko_make_basic(MOD_MASK_SHIFT, KC_PIPE, KC_BACKSLASH),         // sft+* = backslash
+
+  // NUM
+	&ko_make_basic(MOD_MASK_SHIFT, KC_PPLS, KC_KP_ASTERISK),       // sft++ = *
+	&ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, KC_KP_SLASH),          // sft+- = /
+	&ko_make_basic(MOD_MASK_SHIFT, KC_EXLM, KC_PERCENT),           // sft+! = %
+	&ko_make_basic(MOD_MASK_ALT,   KC_KP_8, KC_UP),                // alt+8 = up
+	&ko_make_basic(MOD_MASK_ALT,   KC_KP_5, KC_DOWN),              // alt+5 = down
+	&ko_make_basic(MOD_MASK_ALT,   KC_KP_6, KC_LEFT),              // alt+6 = left
+	&ko_make_basic(MOD_MASK_ALT,   KC_KP_4, KC_RIGHT),             // alt+4 = right
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_1, KC_F1),                // sft+1 = F1
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_2, KC_F2),                // sft+2 = F2
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_3, KC_F3),                // sft+3 = F3
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_4, KC_F4),                // sft+4 = F4
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_5, KC_F5),                // sft+5 = F5
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_6, KC_F6),                // sft+6 = F6
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_7, KC_F7),                // sft+7 = F7
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_8, KC_F8),                // sft+8 = F8
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_9, KC_F9),                // sft+9 = F9
+	&ko_make_basic(MOD_MASK_SHIFT, KC_PDOT, KC_F10),               // sft+. = F11
+	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_0, KC_F11),               // sft+0 = F10
+	&ko_make_basic(MOD_MASK_SHIFT, KC_PEQL, KC_F12),               // sft+= = F12
 };
 
 #ifdef ENCODER_MAP_ENABLE

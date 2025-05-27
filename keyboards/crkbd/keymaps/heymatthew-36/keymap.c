@@ -23,36 +23,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum layers {
   L_BASE,
   L_NAVIGATION,
-  L_BRACKETS,
   L_NUMBER,
-  L_SYMBOL,
+  L_SYM,
   L_FUNCTION
 };
 
 // Home Row Mod GACS
 // https://precondition.github.io/home-row-mods#gacs
-#define GUI_A   MT(MOD_LGUI, KC_A)
-#define ALT_S   MT(MOD_LALT, KC_S)
-#define CTL_D   MT(MOD_LCTL, KC_D)
-#define SFT_F   MT(MOD_LSFT, KC_F)
-
-#define SFT_J   MT(MOD_RSFT, KC_J)
-#define CTL_K   MT(MOD_RCTL, KC_K)
-#define ALT_L   MT(MOD_LALT, KC_L) // left hand alt to avoid macrons on osx
-#define GUI_SC  MT(MOD_RGUI, KC_SCLN)
+#define S_GUI MT(MOD_LGUI, KC_S)
+#define N_ALT MT(MOD_LALT, KC_N)
+#define R_ALT MT(MOD_LALT, KC_R)
+#define T_SFT MT(MOD_LSFT, KC_T)
+#define U_SFT MT(MOD_RSFT, KC_U)
+#define E_CTL MT(MOD_RCTL, KC_E)
+#define I_ALT MT(MOD_LALT, KC_I) // left hand alt to avoid macrons on osx
+#define A_GUI MT(MOD_RGUI, KC_A)
 
 // Thumb clusters
 // reference https://docs.qmk.fm/keycodes
 #define NAV_TAB LT(L_NAVIGATION, KC_TAB)
-#define SYM_SPC LT(L_SYMBOL, KC_SPC)
-#define FUN_ENT LT(L_FUNCTION, KC_ENT)
-#define NUM_BSP LT(L_NUMBER, KC_BSPC)
+#define NUM_ENT LT(L_NUMBER, KC_ENT)
 
 // Shorthand
 #define ____ KC_TRNS       // Transparent
 #define XXXX KC_NO         // NOOP
 #define KC_REDO KC_AGIN    // Pairs with UNDO
-#define MO_BRAC MO(L_BRACKETS)
 
 // BASE
 // xkcd layout https://sites.google.com/alanreiser.com/handsdown/home/more-variations
@@ -87,31 +82,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [L_BASE] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    XXXX,
-        XXXX,    GUI_A,   ALT_S,   CTL_D,   SFT_F,   KC_G,                          KC_H,    SFT_J,   CTL_K,   ALT_L,   GUI_SC,  XXXX,
-        XXXX,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, XXXX,
-    // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
-                                            XXXX,    SYM_SPC, NAV_TAB,     FUN_ENT, NUM_BSP, KC_ESC
+        XXXX,    KC_Q,    KC_M,    KC_H,    KC_G,    KC_Z,                          KC_Y,    KC_F,    KC_O,    KC_B,    KC_QUOT, XXXX,
+        XXXX,    S_GUI,   N_ALT,   R_ALT,   T_SFT,   KC_P,                          KC_W,    U_SFT,   E_CTL,   I_ALT,   A_GUI,   XXXX,
+        XXXX,    KC_X,    KC_K,    KC_C,    KC_D,    KC_J,                          KC_V,    KC_L,    KC_COMM, KC_DOT,  KC_SLSH, XXXX,
+                                            KC_SCLN, KC_SPC,  NAV_TAB,     NUM_ENT, KC_BSPC, KC_ESC
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 
-  [L_SYMBOL] = LAYOUT_split_3x6_3(
+  // SYM
+  // optimised on C symbol frequency https://stackoverflow.com/a/62766162/81271
+  // one handed mouse layer on left
+  //  ╭─────────────────────╮          ╭─────────────────────╮ key, sft, alt
+  //  │     mo2 mo1         │          │     &!  +@  #%  `~  │ sft+( = {
+  //  │ gui alt ctl sft mo3 │          │ ^$  _-  ({[ )}] *=  │ alt+( = [
+  //  │                     ╰───╮  ╭───╯     |\              │ mouse btns on left
+  //  ╰───────────╮ ;:  spc ___ │  │ ent bsp esc ╭───────────╯
+  //              ╰─────────────╯  ╰─────────────╯
+  //                       [sym]     num
+
+  [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_CIRC, KC_EXLM, KC_ASTR, KC_HASH, KC_DLR,  XXXX,
-        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, MO_BRAC, MS_BTN3,                       KC_MINS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, XXXX,
+        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, XXXX,    MS_BTN3,                       KC_MINS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, XXXX,
         XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_PERC, KC_BSLS, KC_PLUS, KC_AMPR, KC_AT,   XXXX,
-    // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
-                                            XXXX,    ____,    XXXX,        KC_GRV,  KC_QUOT, XXXX
-    //                                     +--------+--------+--------+   +--------+--------+--------+
-  ),
-
-  [L_BRACKETS] = LAYOUT_split_3x6_3(
-    // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_CIRC, KC_EXLM, KC_ASTR, KC_HASH, KC_DLR,  XXXX,
-        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, ____,    MS_BTN3,                       KC_UNDS, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, XXXX,
-        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_PERC, KC_PIPE, KC_PLUS, KC_AMPR, KC_AT,   XXXX,
-    // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
-                                            XXXX,    ____,    XXXX,        KC_TILD, KC_DQUO, XXXX
+                                            XXXX,    XXXX,    ____,        KC_GRV,  KC_QUOT, XXXX
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 
@@ -120,7 +114,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_REDO, KC_PSTE, KC_COPY, KC_CUT,  KC_UNDO, XXXX,
         XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, XXXX,
         XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  XXXX,
-    // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
                                             XXXX,    XXXX,    ____,        XXXX,    XXXX,    XXXX
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
@@ -130,7 +123,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_VOLU,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
         XXXX,    KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_VOLD,                       XXXX,    KC_LSFT, KC_RGUI, KC_LALT, KC_RCTL, XXXX,
         XXXX,    KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_MUTE,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
-    // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
                                             KC_MPRV, KC_MPLY, KC_MNXT,     ____,    XXXX,    XXXX
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
@@ -140,11 +132,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
         XXXX,    KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,                        XXXX,    KC_LSFT, KC_RGUI, KC_LALT, KC_RCTL, XXXX,
         XXXX,    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_SLSH,                       XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,
-    // +--------+--------+--------+--------+--------+--------+--------+   +--------+--------+--------+--------+--------+--------+--------+
                                             KC_DOT,  KC_0,    KC_MINS,     XXXX,    ____,    XXXX
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 
+};
+
+  //  ╭─────────────────────╮          ╭─────────────────────╮ key, sft, alt
+  //  │     mo2 mo1         │          │     &!  +@  #%  `~  │ sft+( = {
+  //  │ gui alt ctl sft mo3 │          │ ^$  _-  ({[ )}] *=  │ alt+( = [
+  //  │                     ╰───╮  ╭───╯     |\              │ mouse btns on left
+  //  ╰───────────╮ ;:  spc ___ │  │ ent bsp esc ╭───────────╯
+  //              ╰─────────────╯  ╰─────────────╯
+  //                       [sym]     num
+
+const key_override_t *key_overrides[] = {
+	&ko_make_basic(MOD_MASK_SHIFT, KC_BACKSPACE, KC_DELETE),             // sft+bsp = del
+	&ko_make_basic(MOD_MASK_SHIFT, KC_AMPERSAND, KC_EXCLAIM),            // sft+& = !
+	&ko_make_basic(MOD_MASK_SHIFT, KC_PLUS, KC_AT),                      // sft++ = @
+	&ko_make_basic(MOD_MASK_SHIFT, KC_HASH, KC_PERCENT),                 // sft+# = %
+	&ko_make_basic(MOD_MASK_SHIFT, KC_CIRCUMFLEX, KC_DOLLAR),            // sft+^ = $
+	&ko_make_basic(MOD_MASK_SHIFT, KC_LEFT_PAREN, KC_LEFT_CURLY_BRACE)   // sft+( = {
 };
 
 #ifdef ENCODER_MAP_ENABLE

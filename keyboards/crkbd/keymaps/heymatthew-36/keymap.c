@@ -29,7 +29,7 @@ enum layers {
 // https://precondition.github.io/home-row-mods#gacs
 #define S_GUI MT(MOD_LGUI, KC_S)
 #define N_ALT MT(MOD_LALT, KC_N)
-#define R_ALT MT(MOD_LALT, KC_R)
+#define R_CTL MT(MOD_LCTL, KC_R)
 #define T_SFT MT(MOD_LSFT, KC_T)
 #define U_SFT MT(MOD_RSFT, KC_U)
 #define E_CTL MT(MOD_RCTL, KC_E)
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_BASE] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    KC_Q,    KC_M,    KC_H,    KC_G,    KC_Z,                          KC_Y,    KC_F,    KC_O,    KC_B,    KC_QUOT, XXXX,
-        XXXX,    S_GUI,   N_ALT,   R_ALT,   T_SFT,   KC_P,                          KC_W,    U_SFT,   E_CTL,   I_ALT,   A_GUI,   XXXX,
+        XXXX,    S_GUI,   N_ALT,   R_CTL,   T_SFT,   KC_P,                          KC_W,    U_SFT,   E_CTL,   I_ALT,   A_GUI,   XXXX,
         XXXX,    KC_X,    KC_K,    KC_C,    KC_D,    KC_J,                          KC_V,    KC_L,    KC_COMM, KC_DOT,  KC_SLSH, XXXX,
                                             KC_SCLN, KC_SPC,  SYM_TAB,     NUM_ENT, KC_BSPC, KC_ESC
     //                                     +--------+--------+--------+   +--------+--------+--------+

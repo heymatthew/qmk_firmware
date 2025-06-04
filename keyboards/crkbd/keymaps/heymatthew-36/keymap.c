@@ -43,56 +43,57 @@ enum layers {
 #define SYM_TAB LT(L_SYM, KC_TAB)
 #define NUM_ENT LT(L_NUM, KC_ENT)
 
-// BASE
-// xkcd layout https://sites.google.com/alanreiser.com/handsdown/home/more-variations
-//  ╭─────────────────────╮          ╭─────────────────────╮ gacs home row mods
-//  │  Q   M   H   G   Z  │          │  Y   F   O   B   '  │
-//  │  S   N   R   T   P  │          │  W   U   E   I   A  │
-//  │  X   K   C   D   J  ╰───╮  ╭───╯  V   L   ,   .   /  │
-//  ╰───────────╮  ;  spc tab │  │ ent bsp esc ╭───────────╯
-//              ╰─────────────╯  ╰─────────────╯
-//                        sym      num
-// SYM
-// optimised on C symbol frequency https://stackoverflow.com/a/62766162/81271
-// one handed mouse layer on left
-//  ╭─────────────────────╮          ╭─────────────────────╮ key, sft, alt
-//  │     mo2 mo1         │          │     &!  +@  #%  `~  │ sft+( = {
-//  │ gui alt ctl sft mo3 │          │ ^$  -_  ({[ )}] *=  │ alt+( = [
-//  │                     ╰───╮  ╭───╯     |\              │ mouse btns on left
-//  ╰───────────╮ ;:  spc ___ │  │ ent bsp esc ╭───────────╯
-//              ╰─────────────╯  ╰─────────────╯
-//                       [sym]     num
-// NUM
+//         ╭─────────────────╮          ╭─────────────────╮
+// ╭───────╯  M   H   G   Z  │   BASE   │  Y   F   O   B  ╰───────╮
+// │  Q   S   N   R   T   P  │          │  W   U   E   I   A   '  │
+// ╰───╮  X   K   C   D   J  ╰───╮  ╭───╯  V   L   ,   .   /  ╭───╯
+//     ╰───────────╮  ;  spc tab │  │ ent bsp esc ╭───────────╯
+//                 ╰─────────────╯  ╰─────────────╯
+//                          sym      num
+// xkcd layout
+// see https://sites.google.com/alanreiser.com/handsdown/home/more-variations
+// 
+//                               
+//         ╭─────────────────╮          ╭─────────────────╮
+// ╭───────╯ mo2 mo1         │   SYM    │     &!  +@  #%  ╰───────╮
+// │     gui alt ctl sft mo3 │          │ ^$  -_  ({[ )}] *=  `~  │
+// ╰───╮                     ╰───╮  ╭───╯     |\              ╭───╯
+//     ╰───────────╮ ;:  spc ___ │  │ ent bsp esc ╭───────────╯
+//                 ╰─────────────╯  ╰─────────────╯
+//                          [sym]     num
+// optimised on C symbol frequency, one handed mouse layer on left
+// see https://stackoverflow.com/a/62766162/81271
+//                               
+//         ╭─────────────────╮          ╭─────────────────╮
+// ╭───────╯  7   8↑  9   !% │   NUM    │     vol ply prv ╰───────╮
+// │  +*  -/  4←  5↓  6→  ^$ │          │ mut sft ctl alt gui nxt │
+// ╰───╮  ({[ 1   2   3   )}]╰───╮  ╭───╯     vol             ╭───╯
+//     ╰───────────╮  .   0   =  │  │ ___ bsp esc ╭───────────╯
+//                 ╰─────────────╯  ╰─────────────╯
+//                           sym     [num]
 // arrows on left use alt, one handed media control on right
-//  ╭─────────────────────╮          ╭─────────────────────╮
-//  │ +*  7   8↑  9   !%  │          │     vol ply prv nxt │ sft+1 = F1, sft+2 = F2...
-//  │ -/  4←  5↓  6→  ^$  │          │ mut sft ctl alt gui │ sft+- = /
-//  │ ({[ 1   2   3   )}] ╰───╮  ╭───╯     vol             │
-//  ╰───────────╮  .   0   =  │  │ ___ bsp esc ╭───────────╯
-//              ╰─────────────╯  ╰─────────────╯
-//                        sym     [num]
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_BASE] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    KC_Q,    KC_M,    KC_H,    KC_G,    KC_Z,                          KC_Y,    KC_F,    KC_O,    KC_B,    KC_QUOT, XXXX,
-        XXXX,    S_GUI,   N_ALT,   R_CTL,   T_SFT,   KC_P,                          KC_W,    U_SFT,   E_CTL,   I_ALT,   A_GUI,   XXXX,
+        XXXX,    XXXX,    KC_M,    KC_H,    KC_G,    KC_Z,                          KC_Y,    KC_F,    KC_O,    KC_B,    XXXX,    XXXX,
+        KC_Q,    S_GUI,   N_ALT,   R_CTL,   T_SFT,   KC_P,                          KC_W,    U_SFT,   E_CTL,   I_ALT,   A_GUI,   KC_QUOT,
         XXXX,    KC_X,    KC_K,    KC_C,    KC_D,    KC_J,                          KC_V,    KC_L,    KC_COMM, KC_DOT,  KC_SLSH, XXXX,
                                             KC_SCLN, KC_SPC,  SYM_TAB,     NUM_ENT, KC_BSPC, KC_ESC
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          XXXX,    KC_AMPR, KC_PLUS, KC_HASH, KC_GRAVE, XXXX,
-        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_CIRC, KC_MINS, KC_LPRN, KC_RPRN, KC_ASTR,  XXXX,
-        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          XXXX,    KC_PIPE, XXXX,    XXXX,    XXXX,     XXXX,
+        XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          XXXX,    KC_AMPR, KC_PLUS, KC_HASH, XXXX,    XXXX,
+        XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_CIRC, KC_MINS, KC_LPRN, KC_RPRN, KC_ASTR, KC_GRAVE,
+        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          XXXX,    KC_PIPE, XXXX,    XXXX,    XXXX,    XXXX,
                                             ____,    ____,    XXXX,        ____,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_NUM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    KC_PPLS, KC_KP_7, KC_KP_8, KC_KP_9, KC_EXLM,                       XXXX,    KC_VOLU, KC_MPLY, KC_MPRV, KC_MNXT, XXXX,
-        XXXX,    KC_PMNS, KC_KP_4, KC_KP_5, KC_KP_6, KC_CIRC,                       KC_MUTE, KC_LSFT, KC_RCTL, KC_LALT, KC_RGUI, XXXX,
+        XXXX,    XXXX,    KC_KP_7, KC_KP_8, KC_KP_9, KC_EXLM,                       XXXX,    KC_VOLU, KC_MPLY, KC_MPRV, XXXX,    XXXX,
+        KC_PPLS, KC_PMNS, KC_KP_4, KC_KP_5, KC_KP_6, KC_CIRC,                       KC_MUTE, KC_LSFT, KC_RCTL, KC_LALT, KC_RGUI, KC_MNXT,
         XXXX,    KC_LPRN, KC_KP_1, KC_KP_2, KC_KP_3, KC_RPRN,                       XXXX,    KC_VOLD, XXXX,    XXXX,    XXXX,    XXXX,
                                             KC_PDOT, KC_KP_0, KC_PEQL,     XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+

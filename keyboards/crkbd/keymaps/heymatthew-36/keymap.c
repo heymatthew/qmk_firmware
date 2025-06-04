@@ -66,7 +66,7 @@ enum layers {
 //                               
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  7   8↑  9   !% │   NUM    │     vol ply prv ╰───────╮
-// │  +*  -/  4←  5↓  6→  ^$ │          │ mut sft ctl alt gui nxt │
+// │  -/  +*  4←  5↓  6→  ^$ │          │ mut sft ctl alt gui nxt │
 // ╰───╮  ({[ 1   2   3   )}]╰───╮  ╭───╯     vol             ╭───╯
 //     ╰───────────╮  .   0   =  │  │ ___ bsp esc ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_NUM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_KP_7, KC_KP_8, KC_KP_9, KC_EXLM,                       XXXX,    KC_VOLU, KC_MPLY, KC_MPRV, XXXX,    XXXX,
-        KC_PPLS, KC_PMNS, KC_KP_4, KC_KP_5, KC_KP_6, KC_CIRC,                       KC_MUTE, KC_LSFT, KC_RCTL, KC_LALT, KC_RGUI, KC_MNXT,
+        KC_PMNS, KC_PPLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_CIRC,                       KC_MUTE, KC_LSFT, KC_RCTL, KC_LALT, KC_RGUI, KC_MNXT,
         XXXX,    KC_LPRN, KC_KP_1, KC_KP_2, KC_KP_3, KC_RPRN,                       XXXX,    KC_VOLD, XXXX,    XXXX,    XXXX,    XXXX,
                                             KC_PDOT, KC_KP_0, KC_PEQL,     XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+

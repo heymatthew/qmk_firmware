@@ -52,8 +52,8 @@ enum layers {
 //                          sym      num
 // xkcd layout
 // see https://sites.google.com/alanreiser.com/handsdown/home/more-variations
-// 
-//                               
+//
+//
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯ mo2 mo1         │   SYM    │     &!  +@  #%  ╰───────╮
 // │     gui alt ctl sft mo3 │          │ ^$  -_  ({[ )}] *=  `~  │
@@ -63,7 +63,7 @@ enum layers {
 //                          [sym]     num
 // optimised on C symbol frequency, one handed mouse layer on left
 // see https://stackoverflow.com/a/62766162/81271
-//                               
+//
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  7   8↑  9   !% │   NUM    │     vol ply prv ╰───────╮
 // │  -/  +*  4←  5↓  6→  ^$ │          │ mut sft ctl alt gui nxt │

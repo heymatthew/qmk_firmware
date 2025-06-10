@@ -92,10 +92,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [L_NUM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    KC_KP_7, KC_KP_8, KC_KP_9, KC_EXLM,                       KC_MPRV, KC_VOLU, KC_MPLY, KC_MNXT, XXXX,    XXXX,
-        KC_PMNS, KC_PPLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_CIRC,                       KC_MUTE, KC_LSFT, KC_RCTL, KC_LALT, KC_RGUI, XXXX,
-        XXXX,    KC_LPRN, KC_KP_1, KC_KP_2, KC_KP_3, KC_RPRN,                       XXXX,    KC_VOLD, XXXX,    XXXX,    XXXX,    XXXX,
-                                            KC_PDOT, KC_KP_0, KC_PEQL,     XXXX,    ____,    ____
+        XXXX,    XXXX,    KC_7,    KC_8,    KC_9,    KC_EXLM,                       KC_MPRV, KC_VOLU, KC_MPLY, KC_MNXT, XXXX,    XXXX,
+        KC_PMNS, KC_PPLS, KC_4,    KC_5,    KC_6,    KC_CIRC,                       KC_MUTE, KC_LSFT, KC_RCTL, KC_LALT, KC_RGUI, XXXX,
+        XXXX,    KC_LPRN, KC_1,    KC_2,    KC_3,    KC_RPRN,                       XXXX,    KC_VOLD, XXXX,    XXXX,    XXXX,    XXXX,
+                                            KC_PDOT, KC_0,    KC_PEQL,     XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 };
@@ -116,24 +116,24 @@ const key_override_t *key_overrides[] = {
 	&ko_make_basic(MOD_MASK_SHIFT, KC_PIPE, KC_BACKSLASH),         // sft+* = backslash
 
   // NUM
-	&ko_make_basic(MOD_MASK_SHIFT, KC_PPLS, KC_KP_ASTERISK),       // sft++ = *
-	&ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, KC_KP_SLASH),          // sft+- = /
+	&ko_make_basic(MOD_MASK_SHIFT, KC_PPLS, KC_ASTERISK),          // sft++ = *
+	&ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, KC_SLASH),             // sft+- = /
 	&ko_make_basic(MOD_MASK_SHIFT, KC_EXLM, KC_PERCENT),           // sft+! = %
-	&ko_make_basic(MOD_MASK_ALT,   KC_KP_8, KC_UP),                // alt+8 = up
-	&ko_make_basic(MOD_MASK_ALT,   KC_KP_5, KC_DOWN),              // alt+5 = down
-	&ko_make_basic(MOD_MASK_ALT,   KC_KP_6, KC_RIGHT),             // alt+6 = right
-	&ko_make_basic(MOD_MASK_ALT,   KC_KP_4, KC_LEFT),              // alt+4 = left
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_1, KC_F1),                // sft+1 = F1
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_2, KC_F2),                // sft+2 = F2
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_3, KC_F3),                // sft+3 = F3
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_4, KC_F4),                // sft+4 = F4
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_5, KC_F5),                // sft+5 = F5
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_6, KC_F6),                // sft+6 = F6
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_7, KC_F7),                // sft+7 = F7
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_8, KC_F8),                // sft+8 = F8
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_9, KC_F9),                // sft+9 = F9
+	&ko_make_basic(MOD_MASK_ALT,   KC_8, KC_UP),                   // alt+8 = up
+	&ko_make_basic(MOD_MASK_ALT,   KC_5, KC_DOWN),                 // alt+5 = down
+	&ko_make_basic(MOD_MASK_ALT,   KC_6, KC_RIGHT),                // alt+6 = right
+	&ko_make_basic(MOD_MASK_ALT,   KC_4, KC_LEFT),                 // alt+4 = left
+	&ko_make_basic(MOD_MASK_SHIFT, KC_1, KC_F1),                   // sft+1 = F1
+	&ko_make_basic(MOD_MASK_SHIFT, KC_2, KC_F2),                   // sft+2 = F2
+	&ko_make_basic(MOD_MASK_SHIFT, KC_3, KC_F3),                   // sft+3 = F3
+	&ko_make_basic(MOD_MASK_SHIFT, KC_4, KC_F4),                   // sft+4 = F4
+	&ko_make_basic(MOD_MASK_SHIFT, KC_5, KC_F5),                   // sft+5 = F5
+	&ko_make_basic(MOD_MASK_SHIFT, KC_6, KC_F6),                   // sft+6 = F6
+	&ko_make_basic(MOD_MASK_SHIFT, KC_7, KC_F7),                   // sft+7 = F7
+	&ko_make_basic(MOD_MASK_SHIFT, KC_8, KC_F8),                   // sft+8 = F8
+	&ko_make_basic(MOD_MASK_SHIFT, KC_9, KC_F9),                   // sft+9 = F9
 	&ko_make_basic(MOD_MASK_SHIFT, KC_PDOT, KC_F10),               // sft+. = F11
-	&ko_make_basic(MOD_MASK_SHIFT, KC_KP_0, KC_F11),               // sft+0 = F10
+	&ko_make_basic(MOD_MASK_SHIFT, KC_0, KC_F11),                  // sft+0 = F10
 	&ko_make_basic(MOD_MASK_SHIFT, KC_PEQL, KC_F12),               // sft+= = F12
 };
 

@@ -65,9 +65,9 @@ enum layers {
 // see https://stackoverflow.com/a/62766162/81271
 //
 //         ╭─────────────────╮          ╭─────────────────╮
-// ╭───────╯  7   8↑  9   !% │   NUM    │     vol ply prv ╰───────╮
+// ╭───────╯  7⫧  8↑  9⇑  !% │   NUM    │     vol ply prv ╰───────╮
 // │  -/  +*  4←  5↓  6→  ^$ │          │ mut sft ctl alt gui nxt │
-// ╰───╮  ({[ 1   2   3   )}]╰───╮  ╭───╯     vol             ╭───╯
+// ╰───╮  ({[ 1⫨  2   3⇓  )}]╰───╮  ╭───╯     vol             ╭───╯
 //     ╰───────────╮  .   0   =  │  │ ___ bsp esc ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
 //                           sym     [num]
@@ -123,6 +123,10 @@ const key_override_t *key_overrides[] = {
 	&ko_make_basic(MOD_MASK_ALT,   KC_5, KC_DOWN),                 // alt+5 = down
 	&ko_make_basic(MOD_MASK_ALT,   KC_6, KC_RIGHT),                // alt+6 = right
 	&ko_make_basic(MOD_MASK_ALT,   KC_4, KC_LEFT),                 // alt+4 = left
+	&ko_make_basic(MOD_MASK_ALT,   KC_9, KC_PAGE_UP),              // alt+9 = page up
+	&ko_make_basic(MOD_MASK_ALT,   KC_3, KC_PAGE_DOWN),            // alt+3 = page down
+	&ko_make_basic(MOD_MASK_ALT,   KC_7, KC_HOME),                 // alt+7 = home
+	&ko_make_basic(MOD_MASK_ALT,   KC_1, KC_END),                  // alt+1 = end
 	&ko_make_basic(MOD_MASK_SHIFT, KC_1, KC_F1),                   // sft+1 = F1
 	&ko_make_basic(MOD_MASK_SHIFT, KC_2, KC_F2),                   // sft+2 = F2
 	&ko_make_basic(MOD_MASK_SHIFT, KC_3, KC_F3),                   // sft+3 = F3

@@ -48,8 +48,7 @@ enum layers {
 // │  Q   S   N   R   T   P  │          │  W   U   E   I   A   '  │
 // ╰───╮  X   K   C   D   J  ╰───╮  ╭───╯  V   L   ,   .   /  ╭───╯
 //     ╰───────────╮  ;  spc tab │  │ ent bsp esc ╭───────────╯
-//                 ╰─────────────╯  ╰─────────────╯
-//                          sym      num
+//                 ╰────────[sym]╯  ╰[num]────────╯
 // xkcd layout
 // see https://sites.google.com/alanreiser.com/handsdown/home/more-variations
 //
@@ -59,8 +58,7 @@ enum layers {
 // │     gui alt ctl sft mo3 │          │ ^$  -_  ({[ )}] *=  `~  │
 // ╰───╮                     ╰───╮  ╭───╯     |\              ╭───╯
 //     ╰───────────╮ ;:  spc ___ │  │ ent bsp esc ╭───────────╯
-//                 ╰─────────────╯  ╰─────────────╯
-//                          [sym]     num
+//                 ╰────────[sym]╯  ╰─────────────╯
 // optimised on C symbol frequency, one handed mouse layer on left
 // see https://stackoverflow.com/a/62766162/81271
 //
@@ -69,8 +67,7 @@ enum layers {
 // │  -/  +*  4←  5↓  6→  ^$ │          │ mut sft ctl alt gui nxt │
 // ╰───╮  ({[ 1⫨  2   3⇓  )}]╰───╮  ╭───╯     vol             ╭───╯
 //     ╰───────────╮  .   0   =  │  │ ___ bsp esc ╭───────────╯
-//                 ╰─────────────╯  ╰─────────────╯
-//                           sym     [num]
+//                 ╰─────────────╯  ╰[num]────────╯
 // arrows on left use alt, one handed media control on right
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {

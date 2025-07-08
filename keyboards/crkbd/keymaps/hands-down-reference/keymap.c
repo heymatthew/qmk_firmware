@@ -51,7 +51,7 @@ enum layers {
 // │  Q   R   S   N   T   G  │          │  W   U   E   I   A   '" │
 // ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  /- ╭───╯
 //     ╰───────────╮ esc spc tab │  │ ent bsp esc ╭───────────╯
-//                 ╰────────[sym]╯  ╰[num]────────╯
+//                 ╰─────────sym─╯  ╰─num─────────╯
 // Symbols and Mouse, vim arrows, loosely placed from C frequency
 // see https://stackoverflow.com/a/62766162/81271
 //         ╭─────────────────╮          ╭─────────────────╮

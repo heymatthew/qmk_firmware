@@ -49,7 +49,7 @@ enum layers {
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  C   H   P   V  │   BASE   │  K   Y   O   J  ╰───────╮
 // │  Q   R   S   N   T   G  │          │  W   U   E   I   A   '" │
-// ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  -/ ╭───╯
+// ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  /- ╭───╯
 //     ╰───────────╮ esc spc tab │  │ ent bsp esc ╭───────────╯
 //                 ╰────────[sym]╯  ╰[num]────────╯
 // Symbols and Mouse, vim arrows, loosely placed from C frequency

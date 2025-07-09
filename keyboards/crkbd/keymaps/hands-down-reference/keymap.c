@@ -101,7 +101,7 @@ const key_override_t *key_overrides[] = {
   // BASE
 	&ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_QUESTION),            // sft+, = ?
 	&ko_make_basic(MOD_MASK_SHIFT, KC_DOT,  KC_EXCLAIM),             // sft+. = !
-	&ko_make_basic(MOD_MASK_SHIFT, KC_MINS, KC_SLASH),               // sft+- = /
+	&ko_make_basic(MOD_MASK_SHIFT, KC_SLSH, KC_MINS),                // sft+/ = -
 
   // SYM
 	&ko_make_basic(MOD_MASK_SHIFT, KC_UNDS, KC_MINUS),               // sft+_ = -

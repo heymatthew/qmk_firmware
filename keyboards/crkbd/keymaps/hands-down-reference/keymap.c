@@ -55,9 +55,9 @@ enum layers {
 // Symbols and Mouse, vim arrows, loosely placed from C frequency
 // see https://stackoverflow.com/a/62766162/81271
 //         ╭─────────────────╮          ╭─────────────────╮
-// ╭───────╯ mo2 mo1         │   SYM    │  `~  _-  ([  )] ╰───────╮ hyper+→ = home
+// ╭───────╯ mo2 mo1         │   SYM    │  `~  =+  ([  )] ╰───────╮ hyper+→ = home
 // │     gui alt ctl sft mo3 │          │  ←   ↓   ↑   →   :;  \| │ hyper+↓ = pg down
-// ╰───╮                     ╰───╮  ╭───╯  #@  =+  {<  }>  *& ╭───╯ sft+# = @
+// ╰───╮                     ╰───╮  ╭───╯  #@  _-  {<  }>  *& ╭───╯ sft+# = @
 //     ╰───────────╮         xxx │  │  ^   %   $  ╭───────────╯
 //                 ╰────────[sym]╯  ╰─────────────╯
 // Numbers, arrows, media, and navigation
@@ -79,9 +79,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_GRV,  KC_UNDS, KC_LPRN, KC_RPRN, XXXX,    XXXX,
+        XXXX,    XXXX,    MS_BTN2, MS_BTN1, XXXX,    XXXX,                          KC_GRV,  KC_EQL , KC_LPRN, KC_RPRN, XXXX,    XXXX,
         XXXX,    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_COLN, KC_BSLS,
-        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_HASH, KC_EQL,  KC_LCBR, KC_RCBR, KC_ASTR, XXXX,
+        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          KC_HASH, KC_UNDS, KC_LCBR, KC_RCBR, KC_ASTR, XXXX,
                                             ____,    XXXX,    ____,        KC_CIRC, KC_PERC, KC_DLR
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),

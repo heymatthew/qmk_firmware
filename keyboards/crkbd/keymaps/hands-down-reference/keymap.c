@@ -17,39 +17,46 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// L_BASE, Hands Down Reference optimised for rolls
-// forked from https://sites.google.com/alanreiser.com/handsdown/home/hands-down-reference
+// L_BASE, comfortable wordsmithing
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  C   H   P   V  │          │  K   Y   O   J  ╰───────╮ sft+, = ?
 // │  Q   R   S   N   T   G  │          │  W   U   E   I   A   '" │ sft+. = !
-// ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  /- ╭───╯ sft+/ = -
-//     ╰───────────╮  :  spc tab │  │ ent bsp esc ╭───────────╯
-//                 ╰─num─────nav─╯  ╰─sym─────────╯
+// ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  -_ ╭───╯ sft+- = _
+//     ╰───────────╮     nav spc │  │ sft sym     ╭───────────╯
+//                 ╰─────────────╯  ╰─────────────╯
+//
+// L_NAV, the mouse, media, pagination, and arrow complete package
+//         ╭─────────────────╮          ╭─────────────────╮
+// ╭───────╯ mo2 mo1 nxt prv │          │     end hme vol ╰───────╮ YEL = capsword
+// │ tab mo3 gui alt ctl ply │          │  ←   ↓   ↑   →  bsp YEL │ alt+YEL = capslock
+// ╰───╮                     ╰───╮  ╭───╯     pgd pgu vol ent ╭───╯
+//     ╰───────────╮    [nav]    │  │ sft sym     ╭───────────╯
+//                 ╰─────────────╯  ╰─────────────╯
+//
+// L_SYM, smooth rolls in Go, JavaScript, and Shell
+//         ╭─────────────────╮          ╭─────────────────╮
+// ╭───────╯  <   >   -   |  │          │  ^   (   )   ;  ╰───────╮
+// │ esc  !   *   /   =   &  │          │  #  ctl alt gui  :   `  │
+// ╰───╮  ~   +   [   ]   %  ╰───╮  ╭───╯  @   {   }   $   \  ╭───╯ cmd+- = shrink term font
+//     ╰───────────╮     nav spc │  │    [sym]    ╭───────────╯     cmd+= = grow term font
+//                 ╰─────────────╯  ╰─────────────╯
 //
 // L_NUM, a calculator with a hint of danger
-//         ╭─────────────────╮          ╭─────────────────╮         sft+1 = F1
-// ╭───────╯  (   )   e      │          │      7   8   9  ╰───────╮ sft+0 = F10
-// │      *   /   +   -      │          │  .   1   2   3   0      │ sft+% = F11
-// ╰───╮  ^   [   ]   =      ╰───╮  ╭───╯      4   5   6   %  ╭───╯ sft+. = F12
-//     ╰───────────╮ xxx         │  │ ent bsp esc ╭───────────╯     cmd+- = shrink term font
-//                 ╰[num]────────╯  ╰─────────────╯                 cmd+= = grow term font
-//
-// L_NAV, mouse, media, pagination, and arrow complete package
 //         ╭─────────────────╮          ╭─────────────────╮
-// ╭───────╯ mo2 mo1 vol     │          │ hme pgd pgu end ╰───────╮
-// │ prv gui alt ctl sft mo3 │          │  ←   ↓   ↑   →      nxt │
-// ╰───╮         ply vol     ╰───╮  ╭───╯                     ╭───╯
-//     ╰───────────╮         xxx │  │ ent bsp esc ╭───────────╯
-//                 ╰────────[nav]╯  ╰─────────────╯
+// ╭───────╯  5   3   1   9  │          │  8   0   2   4  ╰───────╮
+// │      7  gui alt ctl F11 │          │ F10 ctl alt gui  6      │
+// ╰───╮  F7  F5  F3  F1  F9 ╰───╮  ╭───╯  F8 F12  F2  F4 F6  ╭───╯
+//     ╰───────────╮    [nav]    │  │    [sym]    ╭───────────╯
+//                 ╰─────────────╯  ╰─────────────╯
 //
-// L_SYM, Optimised rolls for Go, JavaScript, and Bash
-// forked from https://getreuer.info/posts/keyboards/symbol-layer/index.html#my-symbol-layer
-//         ╭─────────────────╮          ╭─────────────────╮
-// ╭───────╯  <   >   -      │          │      ^   %   $  ╰───────╮
-// │  ~   !   *   /   =   &  │          │  @   #   (   )   ;   `  │
-// ╰───╮  :   +   [   ]      ╰───╮  ╭───╯      _   {   }   |  ╭───╯
-//     ╰───────────╮  :  spc tab │  │ xxx         ╭───────────╯
-//                 ╰─────────────╯  ╰[sym]────────╯
+// Influence / Credits
+// --------------------------------------------------------------------------------
+// Alan Reiser's Hands Down Reference for for rolls
+// see https://sites.google.com/alanreiser.com/handsdown/home/hands-down-reference
+// Pascal Getreuer's symbol layer design principles for rolls
+// forked from https://getreuer.info/posts/keyboards/symbol-layer/index.html
+// Callum Oakley's homerow oneshot mods to avoid timers
+// see https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum
 
 #include QMK_KEYBOARD_H
 
@@ -83,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_BASE] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_C,    KC_H,    KC_P,    KC_V,                          KC_K,    KC_Y,    KC_O,    KC_J,    XXXX,    XXXX,
-        KC_Q,    R_GUI,   S_ALT,   N_CTL,   T_SFT,   KC_G,                          KC_W,    U_SFT,   E_CTL,   I_ALT,   A_GUI,   KC_QUOT,
+        KC_Q,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,                          KC_W,    KC_U,    KC_E,    KC_I,    KC_A,   KC_QUOT,
         XXXX,    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,                          KC_Z,    KC_F,    KC_COMM, KC_DOT,  KC_SLSH, XXXX,
                                             NUM_COL, KC_SPC,  TAB_NAV,     ENT_SYM, KC_BSPC, KC_ESC
     //                                     +--------+--------+--------+   +--------+--------+--------+

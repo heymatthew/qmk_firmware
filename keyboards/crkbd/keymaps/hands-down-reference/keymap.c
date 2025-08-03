@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MNXT, KC_MPRV,                       XXXX,    KC_END,  KC_HOME, KC_VOLU, XXXX,    XXXX,
         KC_TAB,  KC_MPLY, OS_LGUI, OS_LALT, OS_LCTL, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSPC, CW_TOGG,
-        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          XXXX,    KC_PGDN, KC_PGUP, KC_VOLD, XXXX,    XXXX,
+        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          XXXX,    KC_PGDN, KC_PGUP, KC_VOLD, KC_ENT,  XXXX,
                                             ____,    XXXX,    ____,        ____,    MO_NUM,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),

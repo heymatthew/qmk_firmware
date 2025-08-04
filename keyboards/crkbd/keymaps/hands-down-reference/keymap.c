@@ -21,22 +21,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  C   H   P   V  │          │  K   Y   O   J  ╰───────╮ sft+, = ?
 // │  Q   R   S   N   T   G  │          │  W   U   E   I   A   '" │ sft+. = !
-// ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  -_ ╭───╯ sft+- = _
-//     ╰───────────╮     spc nav │  │ sym sft     ╭───────────╯
+// ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  :_ ╭───╯ sft+: = _
+//     ╰───────────╮     spc nav │  │ sym esc     ╭───────────╯ FIXME: Capsword : automatic _
 //                 ╰─────────────╯  ╰─────────────╯
 //
 // L_NAV, the mouse, media, pagination, and arrow complete package
 //         ╭─────────────────╮          ╭─────────────────╮
-// ╭───────╯ mo2 mo1 nxt prv │          │     end hme vol ╰───────╮
-// │ tab ply gui alt ctl mo3 │          │  ←   ↓   ↑   →  bsp YEL │ YEL = capsword
+// ╭───────╯ mo2 mo1 ply     │          │ prv end hme vol ╰───────╮
+// │ tab gui alt ctl sft mo3 │          │  ←   ↓   ↑   →  bsp nxt │
 // ╰───╮                     ╰───╮  ╭───╯     pgd pgu vol ent ╭───╯
-//     ╰───────────╮        [nav]│  │ sym sft     ╭───────────╯
+//     ╰───────────╮        [nav]│  │ sym esc     ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
 //
 // L_SYM, smooth rolls for Go, JavaScript, and Shell
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  <   >   -   |  │          │  ^   (   )   ;  ╰───────╮
-// │ esc  !   *   /   =   &  │          │  #  ctl alt gui  :   `  │
+// │ esc  !   *   /   =   &  │          │  #  sft ctl alt gui  `  │
 // ╰───╮  ~   +   [   ]   %  ╰───╮  ╭───╯  \   {   }   @   $  ╭───╯ cmd+- = shrink term font
 //     ╰───────────╮     spc nav │  │[sym]        ╭───────────╯     cmd+= = grow term font
 //                 ╰─────────────╯  ╰─────────────╯
@@ -44,8 +44,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // L_NUM, a calculator with a hint of danger
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  5   3   1   9  │          │  8   0   2   4  ╰───────╮
-// │      7  gui alt ctl F11 │          │ F10 ctl alt gui  6      │
-// ╰───╮  F7  F5  F3  F1  F9 ╰───╮  ╭───╯  F8 F12  F2  F4 F6  ╭───╯
+// │  7  gui alt ctl sft F11 │          │ F10 sft ctl alt gui  6  │
+// ╰───╮  F7  F5  F3  F1  F9 ╰───╮  ╭───╯  F8 F12  F2  F4 F6  ╭───╯ sft+sft = Capsword
 //     ╰───────────╮        [nav]│  │[sym]        ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
 //
@@ -57,6 +57,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // forked from https://getreuer.info/posts/keyboards/symbol-layer/index.html
 // Callum Oakley's homerow oneshot mods to avoid timers
 // see https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum
+// Precondition's Home Row Mods GACS
+// see https://precondition.github.io/home-row-mods#gacs
 
 #include QMK_KEYBOARD_H
 
@@ -74,28 +76,29 @@ enum layers {
 #define MO_NAV MO(L_NAV)
 #define MO_SYM MO(L_SYM)
 #define MO_NUM MO(L_NUM)
+
+#define OS_LGUI OSM(MOD_LGUI)
+#define OS_LALT OSM(MOD_LALT)
 #define OS_LCTL OSM(MOD_LCTL)
 #define OS_LSFT OSM(MOD_LSFT)
-#define OS_LALT OSM(MOD_LALT)
-#define OS_LGUI OSM(MOD_LGUI)
+#define OS_RGUI OSM(MOD_RGUI)
+#define OS_RALT OSM(MOD_RALT)
 #define OS_RCTL OSM(MOD_RCTL)
 #define OS_RSFT OSM(MOD_RSFT)
-#define OS_RALT OSM(MOD_RALT)
-#define OS_RGUI OSM(MOD_RGUI)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_BASE] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_C,    KC_H,    KC_P,    KC_V,                          KC_K,    KC_Y,    KC_O,    KC_J,    XXXX,    XXXX,
         KC_Q,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,                          KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    KC_QUOT,
-        XXXX,    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,                          KC_Z,    KC_F,    KC_COMM, KC_DOT,  KC_MINS, XXXX,
-                                            XXXX,    KC_SPC,  MO_NAV,      MO_SYM,  KC_LSFT, XXXX
+        XXXX,    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,                          KC_Z,    KC_F,    KC_COMM, KC_DOT,  KC_COLN, XXXX,
+                                            XXXX,    KC_SPC,  MO_NAV,      MO_SYM,  KC_ESC,  XXXX
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_NAV] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MNXT, KC_MPRV,                       XXXX,    KC_END,  KC_HOME, KC_VOLU, XXXX,    XXXX,
-        KC_TAB,  KC_MPLY, OS_LGUI, OS_LALT, OS_LCTL, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSPC, CW_TOGG,
+        XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MPLY, XXXX,                          KC_MPRV, KC_END,  KC_HOME, KC_VOLU, XXXX,    XXXX,
+        KC_TAB,  OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSPC, KC_MNXT,
         XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          XXXX,    KC_PGDN, KC_PGUP, KC_VOLD, KC_ENT,  XXXX,
                                             ____,    ____,    XXXX,        MO_NUM,  ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
@@ -103,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_PIPE,                       KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, XXXX,    XXXX,
-        KC_ESC,  KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_HASH, OS_RCTL, OS_LALT, OS_RGUI, KC_COLN, KC_GRV,
+        KC_ESC,  KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_HASH, OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_GRV,
         XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_LCBR, KC_RCBR, KC_AT,   KC_DLR,  XXXX,
                                             ____,    ____,    MO_NUM,      XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
@@ -111,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_NUM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_5,    KC_3,    KC_1,    KC_9,                          KC_8,    KC_0,    KC_2,    KC_4,    XXXX,    XXXX,
-        XXXX,    KC_7,    OS_LGUI, OS_LALT, OS_LCTL, XXXX,                          KC_F10,  OS_RCTL, OS_LALT, OS_RGUI, KC_6,    XXXX,
+        KC_7,    OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, KC_F11,                        KC_F10,  OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_6,
         XXXX,    KC_F7,   KC_F5,   KC_F3,   KC_F1,   KC_F9,                         KC_F8,   KC_F12,  KC_F2,   KC_F4,   KC_F6,   XXXX,
                                             ____,    ____,    XXXX,        XXXX,    ____,     ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
@@ -124,6 +127,7 @@ const key_override_t *key_overrides[] = {
   // L_BASE
 	&ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_QUESTION),      // sft+, = ?
 	&ko_make_basic(MOD_MASK_SHIFT, KC_DOT,  KC_EXCLAIM),       // sft+. = !
+	&ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_UNDERSCORE),    // sft+: = _
 };
 
 #ifdef ENCODER_MAP_ENABLE

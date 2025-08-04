@@ -19,10 +19,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // L_BASE, comfortable wordsmithing
 //         ╭─────────────────╮          ╭─────────────────╮
-// ╭───────╯  C   H   P   V  │          │  K   Y   O   J  ╰───────╮ sft+, = ?
-// │  Q   R   S   N   T   G  │          │  W   U   E   I   A   '" │ sft+. = !
-// ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  :_ ╭───╯ sft+: = _
-//     ╰───────────╮     spc nav │  │ sym esc     ╭───────────╯ FIXME: Capsword : automatic _
+// ╭───────╯  C   H   P   V  │          │  K   Y   O   J  ╰───────╮
+// │  Q   R   S   N   T   G  │          │  W   U   E   I   A   '" │
+// ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  -_ ╭───╯ sft+, = ?
+//     ╰───────────╮     spc nav │  │ sym esc     ╭───────────╯     sft+. = !
 //                 ╰─────────────╯  ╰─────────────╯
 //
 // L_NAV, the mouse, media, pagination, and arrow complete package
@@ -36,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // L_SYM, smooth rolls for Go, JavaScript, and Shell
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  <   >   -   |  │          │  ^   (   )   ;  ╰───────╮
-// │ esc  !   *   /   =   &  │          │  #  sft ctl alt gui  `  │
+// │  :   !   *   /   =   &  │          │  #  sft ctl alt gui  `  │
 // ╰───╮  ~   +   [   ]   %  ╰───╮  ╭───╯  \   {   }   @   $  ╭───╯ cmd+- = shrink term font
 //     ╰───────────╮     spc nav │  │[sym]        ╭───────────╯     cmd+= = grow term font
 //                 ╰─────────────╯  ╰─────────────╯
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_C,    KC_H,    KC_P,    KC_V,                          KC_K,    KC_Y,    KC_O,    KC_J,    XXXX,    XXXX,
         KC_Q,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,                          KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    KC_QUOT,
-        XXXX,    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,                          KC_Z,    KC_F,    KC_COMM, KC_DOT,  KC_COLN, XXXX,
+        XXXX,    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,                          KC_Z,    KC_F,    KC_COMM, KC_DOT,  KC_MINS, XXXX,
                                             XXXX,    KC_SPC,  MO_NAV,      MO_SYM,  KC_ESC,  XXXX
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_PIPE,                       KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, XXXX,    XXXX,
-        KC_ESC,  KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_HASH, OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_GRV,
+        KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_HASH, OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_GRV,
         XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_LCBR, KC_RCBR, KC_AT,   KC_DLR,  XXXX,
                                             ____,    ____,    MO_NUM,      XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+

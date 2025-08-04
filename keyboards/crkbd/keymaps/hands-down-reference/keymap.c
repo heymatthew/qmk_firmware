@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // ╭───────╯  C   H   P   V  │          │  K   Y   O   J  ╰───────╮ sft+, = ?
 // │  Q   R   S   N   T   G  │          │  W   U   E   I   A   '" │ sft+. = !
 // ╰───╮  X   M   L   D   B  ╰───╮  ╭───╯  Z   F   ,?  .!  -_ ╭───╯ sft+- = _
-//     ╰───────────╮     nav spc │  │ sft sym     ╭───────────╯
+//     ╰───────────╮     spc nav │  │ sym sft     ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
 //
 // L_NAV, the mouse, media, pagination, and arrow complete package
@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // ╭───────╯ mo2 mo1 nxt prv │          │     end hme vol ╰───────╮
 // │ tab ply gui alt ctl mo3 │          │  ←   ↓   ↑   →  bsp YEL │ YEL = capsword
 // ╰───╮                     ╰───╮  ╭───╯     pgd pgu vol ent ╭───╯
-//     ╰───────────╮    [nav]    │  │ sft sym     ╭───────────╯
+//     ╰───────────╮        [nav]│  │ sym sft     ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
 //
 // L_SYM, smooth rolls for Go, JavaScript, and Shell
@@ -38,7 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // ╭───────╯  <   >   -   |  │          │  ^   (   )   ;  ╰───────╮
 // │ esc  !   *   /   =   &  │          │  #  ctl alt gui  :   `  │
 // ╰───╮  ~   +   [   ]   %  ╰───╮  ╭───╯  \   {   }   @   $  ╭───╯ cmd+- = shrink term font
-//     ╰───────────╮     nav spc │  │    [sym]    ╭───────────╯     cmd+= = grow term font
+//     ╰───────────╮     spc nav │  │[sym]        ╭───────────╯     cmd+= = grow term font
 //                 ╰─────────────╯  ╰─────────────╯
 //
 // L_NUM, a calculator with a hint of danger
@@ -46,7 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // ╭───────╯  5   3   1   9  │          │  8   0   2   4  ╰───────╮
 // │      7  gui alt ctl F11 │          │ F10 ctl alt gui  6      │
 // ╰───╮  F7  F5  F3  F1  F9 ╰───╮  ╭───╯  F8 F12  F2  F4 F6  ╭───╯
-//     ╰───────────╮    [nav]    │  │    [sym]    ╭───────────╯
+//     ╰───────────╮        [nav]│  │[sym]        ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
 //
 // Influence / Credits
@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    XXXX,    KC_C,    KC_H,    KC_P,    KC_V,                          KC_K,    KC_Y,    KC_O,    KC_J,    XXXX,    XXXX,
         KC_Q,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,                          KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    KC_QUOT,
         XXXX,    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,                          KC_Z,    KC_F,    KC_COMM, KC_DOT,  KC_MINS, XXXX,
-                                            XXXX,    MO_NAV,  KC_SPC,      KC_LSFT, MO_SYM,  XXXX
+                                            XXXX,    KC_SPC,  MO_NAV,      MO_SYM,  KC_LSFT, XXXX
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_NAV] = LAYOUT_split_3x6_3(
@@ -97,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MNXT, KC_MPRV,                       XXXX,    KC_END,  KC_HOME, KC_VOLU, XXXX,    XXXX,
         KC_TAB,  KC_MPLY, OS_LGUI, OS_LALT, OS_LCTL, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSPC, CW_TOGG,
         XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          XXXX,    KC_PGDN, KC_PGUP, KC_VOLD, KC_ENT,  XXXX,
-                                            ____,    XXXX,    ____,        ____,    MO_NUM,    ____
+                                            ____,    ____,    XXXX,        MO_NUM,  ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_SYM] = LAYOUT_split_3x6_3(
@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_PIPE,                       KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, XXXX,    XXXX,
         KC_ESC,  KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_HASH, OS_RCTL, OS_LALT, OS_RGUI, KC_COLN, KC_GRV,
         XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_LBRC, KC_RBRC, KC_AT,   KC_DLR,  XXXX,
-                                            ____,    MO_NUM,  ____,        ____,    XXXX,    ____
+                                            ____,    ____,    MO_NUM,      XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_NUM] = LAYOUT_split_3x6_3(
@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    XXXX,    KC_5,    KC_3,    KC_1,    KC_9,                          KC_8,    KC_0,    KC_2,    KC_4,    XXXX,    XXXX,
         XXXX,    KC_7,    OS_LGUI, OS_LALT, OS_LCTL, XXXX,                          KC_F10,  OS_RCTL, OS_LALT, OS_RGUI, KC_6,    XXXX,
         XXXX,    KC_F7,   KC_F5,   KC_F3,   KC_F1,   KC_F9,                         KC_F8,   KC_F12,  KC_F2,   KC_F4,   KC_F6,   XXXX,
-                                            ____,    XXXX,    ____,        ____,    XXXX,    ____
+                                            ____,    ____,    XXXX,        XXXX,    ____,     ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
 };

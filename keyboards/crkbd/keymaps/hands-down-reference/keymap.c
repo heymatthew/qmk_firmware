@@ -27,9 +27,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 // L_NAV, the mouse, media, pagination, and arrow complete package
 //         ╭─────────────────╮          ╭─────────────────╮
-// ╭───────╯ mo2 mo1 ply     │          │ prv end hme vol ╰───────╮
-// │ tab gui alt ctl sft mo3 │          │  ←   ↓   ↑   →  bsp nxt │
-// ╰───╮                     ╰───╮  ╭───╯     pgd pgu vol ent ╭───╯
+// ╭───────╯ mo2 mo1 ply     │          │     end hme     ╰───────╮
+// │ tab gui alt ctl sft mo3 │          │  ←   ↓   ↑   →  bsp     │
+// ╰───╮ prv vol vol nxt     ╰───╮  ╭───╯     pgd pgu     ent ╭───╯
 //     ╰───────────╮        [nav]│  │ sym esc     ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
 //
@@ -97,9 +97,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [L_NAV] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MPLY, XXXX,                          KC_MPRV, KC_END,  KC_HOME, KC_VOLU, XXXX,    XXXX,
-        KC_TAB,  OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSPC, KC_MNXT,
-        XXXX,    XXXX,    XXXX,    XXXX,    XXXX,    XXXX,                          XXXX,    KC_PGDN, KC_PGUP, KC_VOLD, KC_ENT,  XXXX,
+        XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MPLY, XXXX,                          XXXX,    KC_END,  KC_HOME, XXXX,    XXXX,    XXXX,
+        KC_TAB,  OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_BSPC, XXXX,   
+        XXXX,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXX,                          XXXX,    KC_PGDN, KC_PGUP, XXXX,    KC_ENT,  XXXX,
                                             ____,    ____,    XXXX,        MO_NUM,  ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),

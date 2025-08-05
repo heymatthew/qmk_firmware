@@ -130,6 +130,11 @@ const key_override_t *key_overrides[] = {
 	&ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_UNDERSCORE),    // sft+: = _
 };
 
+const uint16_t PROGMEM both_shifts_chord[] = {OS_LSFT, OS_RSFT, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(both_shifts_chord, QK_CAPS_WORD_TOGGLE),
+};
+
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
   [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(RM_VALD, RM_VALU), ENCODER_CCW_CW(KC_RGHT, KC_LEFT), },

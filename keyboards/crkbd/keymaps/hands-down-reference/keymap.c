@@ -35,16 +35,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 // L_SYM, smooth rolls for Go, JavaScript, and Shell
 //         ╭─────────────────╮          ╭─────────────────╮
-// ╭───────╯  <   >   -   |  │          │  ^   (   )   ;  ╰───────╮
-// │  :   !   *   /   =   &  │          │  #  sft ctl alt gui  `  │
-// ╰───╮  ~   +   [   ]   %  ╰───╮  ╭───╯  \   {   }   @   $  ╭───╯ cmd+- = shrink term font
-//     ╰───────────╮     spc nav │  │[sym]        ╭───────────╯     cmd+= = grow term font
+// ╭───────╯  <   >   -   `  │          │  ^   (   )   ;  ╰───────╮ gui+% = screenshot window
+// │  :   !   *   /   =   &  │          │  |  sft ctl alt gui  $  │ gui+* = screenshot lasso
+// ╰───╮  ~   +   [   ]   %  ╰───╮  ╭───╯  \   #   {   }   @  ╭───╯ gui+- = shrink term font
+//     ╰───────────╮     spc nav │  │[sym]        ╭───────────╯     gui+= = grow term font
 //                 ╰─────────────╯  ╰─────────────╯
 //
 // L_NUM, a calculator with a hint of danger
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  5   3   1   9  │          │  8   0   2   4  ╰───────╮
-// │  7  gui alt ctl sft F11 │          │ F10 sft ctl alt gui  6  │
+// │  7  gui alt ctl sft F11 │          │ F10 sft ctl alt gui  6  │ gui+0 = reset term font
 // ╰───╮  F7  F5  F3  F1  F9 ╰───╮  ╭───╯  F8 F12  F2  F4 F6  ╭───╯ sft+sft = Capsword
 //     ╰───────────╮        [nav]│  │[sym]        ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
@@ -105,9 +105,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_PIPE,                       KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, XXXX,    XXXX,
-        KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_HASH, OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_GRV,
-        XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_LCBR, KC_RCBR, KC_AT,   KC_DLR,  XXXX,
+        XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_GRV,                        KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, XXXX,    XXXX,
+        KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_PIPE, OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_DLR,
+        XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_HASH, KC_LCBR, KC_RCBR, KC_AT,  XXXX,
                                             ____,    ____,    MO_NUM,      XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),

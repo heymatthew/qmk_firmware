@@ -127,7 +127,6 @@ const key_override_t *key_overrides[] = {
   // L_BASE
 	&ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_QUESTION),      // sft+, = ?
 	&ko_make_basic(MOD_MASK_SHIFT, KC_DOT,  KC_EXCLAIM),       // sft+. = !
-	&ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_UNDERSCORE),    // sft+: = _
 };
 
 const uint16_t PROGMEM both_shifts_chord[] = {OS_LSFT, OS_RSFT, COMBO_END};

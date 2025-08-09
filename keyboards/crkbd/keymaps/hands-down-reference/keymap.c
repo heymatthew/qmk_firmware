@@ -73,18 +73,19 @@ enum layers {
 #define ____ KC_TRNS     // Transparent
 #define XXXX KC_NO       // NOOP
 #define KC_REDO KC_AGIN  // Pairs with UNDO
-#define MO_NAV MO(L_NAV)
-#define MO_SYM MO(L_SYM)
-#define MO_NUM MO(L_NUM)
-
-#define OS_LGUI OSM(MOD_LGUI)
-#define OS_LALT OSM(MOD_LALT)
-#define OS_LCTL OSM(MOD_LCTL)
-#define OS_LSFT OSM(MOD_LSFT)
-#define OS_RGUI OSM(MOD_RGUI)
-#define OS_RALT OSM(MOD_RALT)
-#define OS_RCTL OSM(MOD_RCTL)
-#define OS_RSFT OSM(MOD_RSFT)
+#define OSL_NAV OSL(L_NAV)
+#define OSL_SYM OSL(L_SYM)
+#define OSL_NUM OSL(L_NUM)
+enum custom_keycodes {
+    OS_LGUI = SAFE_RANGE,
+    OS_LALT,
+    OS_LCTL,
+    OS_LSFT,
+    OS_RGUI,
+    OS_RALT,
+    OS_RCTL,
+    OS_RSFT,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_BASE] = LAYOUT_split_3x6_3(
@@ -92,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    XXXX,    KC_C,    KC_H,    KC_P,    KC_V,                          KC_K,    KC_Y,    KC_O,    KC_J,    XXXX,    XXXX,
         KC_Q,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,                          KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    KC_QUOT,
         XXXX,    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,                          KC_Z,    KC_F,    KC_COMM, KC_DOT,  KC_MINS, XXXX,
-                                            XXXX,    KC_SPC,  MO_NAV,      MO_SYM,  KC_ESC,  XXXX
+                                            XXXX,    KC_SPC,  OSL_NAV,     OSL_SYM, KC_ESC,  XXXX
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_NAV] = LAYOUT_split_3x6_3(
@@ -100,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MPLY, XXXX,                          XXXX,    KC_END,  KC_HOME, KC_BSPC, XXXX,    XXXX,
         XXXX,    OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_ENT,  XXXX,   
         XXXX,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXX,                          XXXX,    KC_PGDN, KC_PGUP, KC_TAB,  XXXX,    XXXX,
-                                            ____,    ____,    XXXX,        MO_NUM,  ____,    ____
+                                            ____,    ____,    XXXX,        OSL_NUM, ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_SYM] = LAYOUT_split_3x6_3(
@@ -108,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_GRV,                        KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, XXXX,    XXXX,
         KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_PIPE, OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_DLR,
         XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_HASH, KC_LCBR, KC_RCBR, KC_AT,  XXXX,
-                                            ____,    ____,    MO_NUM,      XXXX,    ____,    ____
+                                            ____,    ____,    OSL_NUM,     XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_NUM] = LAYOUT_split_3x6_3(
@@ -142,3 +143,21 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
   [3] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(RM_VALD, RM_VALU), ENCODER_CCW_CW(KC_RGHT, KC_LEFT), },
 };
 #endif
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            // Workaround: OSL() is deactivated by OSM() which cancels the mod
+            // This workaround allows rolling to activate GACS one shots
+            case OS_LGUI: set_oneshot_mods(MOD_BIT(KC_LGUI)); return false;
+            case OS_LALT: set_oneshot_mods(MOD_BIT(KC_LALT)); return false;
+            case OS_LCTL: set_oneshot_mods(MOD_BIT(KC_LCTL)); return false;
+            case OS_LSFT: set_oneshot_mods(MOD_BIT(KC_LSFT)); return false;
+            case OS_RGUI: set_oneshot_mods(MOD_BIT(KC_RGUI)); return false;
+            case OS_RALT: set_oneshot_mods(MOD_BIT(KC_RALT)); return false;
+            case OS_RCTL: set_oneshot_mods(MOD_BIT(KC_RCTL)); return false;
+            case OS_RSFT: set_oneshot_mods(MOD_BIT(KC_RSFT)); return false;
+        }
+    }
+    return true;
+}

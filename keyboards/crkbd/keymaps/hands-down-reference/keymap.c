@@ -77,14 +77,10 @@ enum layers {
 #define OSL_SYM OSL(L_SYM)
 #define OSL_NUM OSL(L_NUM)
 enum custom_keycodes {
-    OS_LGUI = SAFE_RANGE,
-    OS_LALT,
-    OS_LCTL,
-    OS_LSFT,
-    OS_RGUI,
-    OS_RALT,
-    OS_RCTL,
-    OS_RSFT,
+    OS_GUI = SAFE_RANGE,
+    OS_ALT,
+    OS_CTL,
+    OS_SFT,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -99,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_NAV] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MPLY, XXXX,                          XXXX,    KC_END,  KC_HOME, KC_BSPC, XXXX,    XXXX,
-        XXXX,    OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_ENT,  XXXX,   
+        XXXX,    OS_GUI, OS_ALT, OS_CTL, OS_SFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_ENT,  XXXX,   
         XXXX,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXX,                          XXXX,    KC_PGDN, KC_PGUP, KC_TAB,  XXXX,    XXXX,
                                             ____,    ____,    XXXX,        OSL_NUM, ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
@@ -107,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_GRV,                        KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, XXXX,    XXXX,
-        KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_PIPE, OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_DLR,
+        KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_PIPE, OS_SFT, OS_CTL, OS_ALT, OS_GUI, KC_DLR,
         XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_HASH, KC_LCBR, KC_RCBR, KC_AT,  XXXX,
                                             ____,    ____,    OSL_NUM,     XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
@@ -115,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_NUM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_5,    KC_3,    KC_1,    KC_9,                          KC_8,    KC_0,    KC_2,    KC_4,    XXXX,    XXXX,
-        KC_7,    OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, KC_F11,                        KC_F10,  OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_6,
+        KC_7,    OS_GUI, OS_ALT, OS_CTL, OS_SFT, KC_F11,                        KC_F10,  OS_SFT, OS_CTL, OS_ALT, OS_GUI, KC_6,
         XXXX,    KC_F7,   KC_F5,   KC_F3,   KC_F1,   KC_F9,                         KC_F8,   KC_F12,  KC_F2,   KC_F4,   KC_F6,   XXXX,
                                             ____,    ____,    XXXX,        XXXX,    ____,     ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
@@ -130,7 +126,7 @@ const key_override_t *key_overrides[] = {
 	&ko_make_basic(MOD_MASK_SHIFT, KC_DOT,  KC_EXCLAIM),       // sft+. = !
 };
 
-const uint16_t PROGMEM both_shifts_chord[] = {OS_LSFT, OS_RSFT, COMBO_END};
+const uint16_t PROGMEM both_shifts_chord[] = {OS_SFT, OS_SFT, COMBO_END};
 combo_t key_combos[] = {
     COMBO(both_shifts_chord, QK_CAPS_WORD_TOGGLE),
 };
@@ -144,20 +140,36 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
+static uint16_t mod_tap_pending = 0;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // key pressed while mod-tap pending cancells the tap
+    if (record->event.pressed && mod_tap_pending) {
+        mod_tap_pending = 0;
+    }
+
+    uint8_t mod_bit = 0;
+    switch (keycode) {
+        case OS_GUI: mod_bit = MOD_BIT(KC_LGUI); break;
+        case OS_ALT: mod_bit = MOD_BIT(KC_LALT); break;
+        case OS_CTL: mod_bit = MOD_BIT(KC_LCTL); break;
+        case OS_SFT: mod_bit = MOD_BIT(KC_LSFT); break;
+        default:
+            // Early return, not custom mod-tap
+            return true;
+    }
+
     if (record->event.pressed) {
-        switch (keycode) {
-            // Workaround: OSL() is deactivated by OSM() which cancels the mod
-            // This workaround allows rolling to activate GACS one shots
-            case OS_LGUI: set_oneshot_mods(MOD_BIT(KC_LGUI)); return false;
-            case OS_LALT: set_oneshot_mods(MOD_BIT(KC_LALT)); return false;
-            case OS_LCTL: set_oneshot_mods(MOD_BIT(KC_LCTL)); return false;
-            case OS_LSFT: set_oneshot_mods(MOD_BIT(KC_LSFT)); return false;
-            case OS_RGUI: set_oneshot_mods(MOD_BIT(KC_RGUI)); return false;
-            case OS_RALT: set_oneshot_mods(MOD_BIT(KC_RALT)); return false;
-            case OS_RCTL: set_oneshot_mods(MOD_BIT(KC_RCTL)); return false;
-            case OS_RSFT: set_oneshot_mods(MOD_BIT(KC_RSFT)); return false;
+        // keydown: register mod and track pending tap
+        register_mods(mod_bit);
+        mod_tap_pending = keycode;
+    } else {
+        // keyup: unregister the mod
+        unregister_mods(mod_bit);
+        if (mod_tap_pending == keycode) {
+            // no other key pressed = oneshot
+            set_oneshot_mods(mod_bit);
         }
     }
-    return true;
+    // We handled this keycode, don't let QMK process it further
+    return false;
 }

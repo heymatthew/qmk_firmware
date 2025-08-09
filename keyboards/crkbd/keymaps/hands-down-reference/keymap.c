@@ -141,6 +141,10 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #endif
 
 static uint16_t mod_tap_pending = 0;
+static uint16_t locked_mods = 0;
+static uint16_t tap_dance_keycode = 0;
+static uint8_t  tap_dance_count = 0;
+static uint16_t tap_dance_timer = 0;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // key pressed while mod-tap pending cancells the tap
     if (record->event.pressed && mod_tap_pending) {
@@ -154,22 +158,49 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_CTL: mod_bit = MOD_BIT(KC_LCTL); break;
         case OS_SFT: mod_bit = MOD_BIT(KC_LSFT); break;
         default:
-            // Early return, not custom mod-tap
-            return true;
+            tap_dance_count = 0;
+            return true; // nothing to see here
     }
 
-    if (record->event.pressed) {
+    // Unlocking a currently locked modifier
+    if (locked_mods & mod_bit) {
+        if (record->event.pressed) {
+            unregister_mods(mod_bit); // Temporarily unregister for this keypress.
+        } else {
+            locked_mods &= ~mod_bit; // On release, permanently unlock the modifier.
+            tap_dance_count = 0;     // Reset counter.
+        }
+        return false;
+    }
+
+    if (record->event.pressed) { // Keydown
         // keydown: register mod and track pending tap
         register_mods(mod_bit);
         mod_tap_pending = keycode;
-    } else {
-        // keyup: unregister the mod
+    } else { // keyup
         unregister_mods(mod_bit);
-        if (mod_tap_pending == keycode) {
-            // no other key pressed = oneshot
-            set_oneshot_mods(mod_bit);
+        if (mod_tap_pending == keycode) { // tapped key
+            // Check tap-toggle locking
+            if (timer_elapsed(tap_dance_timer) > TAPPING_TERM || tap_dance_keycode != keycode) {
+                // reset count when timer expiration or different key tapped
+                tap_dance_count = 1;
+            } else {
+                tap_dance_count++;
+            }
+
+            tap_dance_keycode = keycode;
+            tap_dance_timer = timer_read();
+
+            if (tap_dance_count >= ONESHOT_TAP_TOGGLE) {
+                // lock modifier
+                locked_mods |= mod_bit;
+                register_mods(mod_bit); // Keep it registered.
+                tap_dance_count = 0;    // Reset counter.
+            } else {
+                // regular one-shot tap
+                set_oneshot_mods(mod_bit);
+            }
         }
     }
-    // We handled this keycode, don't let QMK process it further
-    return false;
+    return false; // keycode handled
 }

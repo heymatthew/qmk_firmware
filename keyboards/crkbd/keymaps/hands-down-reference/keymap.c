@@ -73,20 +73,14 @@ enum layers {
 #define ____ KC_TRNS     // Transparent
 #define XXXX KC_NO       // NOOP
 #define KC_REDO KC_AGIN  // Pairs with UNDO
-#define OSL_NAV OSL(L_NAV)
-#define OSL_SYM OSL(L_SYM)
-#define OSL_NUM OSL(L_NUM)
-enum custom_keycodes {
-    OS_GUI = SAFE_RANGE,
-    OS_ALT,
-    OS_CTL,
-    OS_SFT,
-};
+#define OSL_NAV MO(L_NAV)
+#define OSL_SYM MO(L_SYM)
+#define OSL_NUM MO(L_NUM)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_BASE] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    KC_C,    KC_H,    KC_P,    KC_V,                          KC_K,    KC_Y,    KC_O,    KC_J,    XXXX,    XXXX,
+        XXXX,    KC_Q,    KC_C,    KC_H,    KC_P,    KC_V,                          KC_K,    KC_Y,    KC_O,    KC_J,    KC_QUOT, XXXX,
         KC_Q,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,                          KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    KC_QUOT,
         XXXX,    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,                          KC_Z,    KC_F,    KC_COMM, KC_DOT,  KC_MINS, XXXX,
                                             XXXX,    KC_SPC,  OSL_NAV,     OSL_SYM, KC_ESC,  XXXX
@@ -95,23 +89,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_NAV] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MPLY, XXXX,                          XXXX,    KC_END,  KC_HOME, KC_BSPC, XXXX,    XXXX,
-        XXXX,    OS_GUI, OS_ALT, OS_CTL, OS_SFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_ENT,  XXXX,   
+        XXXX,    XXXX,  XXXX,  XXXX,  XXXX,  MS_BTN3,                        KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT, KC_ENT,  XXXX,   
         XXXX,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXX,                          XXXX,    KC_PGDN, KC_PGUP, KC_TAB,  XXXX,    XXXX,
                                             ____,    ____,    XXXX,        OSL_NUM, ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
-        XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_GRV,                        KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, XXXX,    XXXX,
-        KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_PIPE, OS_SFT, OS_CTL, OS_ALT, OS_GUI, KC_DLR,
-        XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_HASH, KC_LCBR, KC_RCBR, KC_AT,  XXXX,
+        XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_GRV,                        KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, KC_DLR,  XXXX,
+        KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_PIPE, XXXX,  XXXX,  XXXX,  XXXX,  KC_DLR,
+        XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_HASH, KC_LCBR, KC_RCBR, KC_AT,   XXXX,
                                             ____,    ____,    OSL_NUM,     XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_NUM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_5,    KC_3,    KC_1,    KC_9,                          KC_8,    KC_0,    KC_2,    KC_4,    XXXX,    XXXX,
-        KC_7,    OS_GUI, OS_ALT, OS_CTL, OS_SFT, KC_F11,                        KC_F10,  OS_SFT, OS_CTL, OS_ALT, OS_GUI, KC_6,
+        KC_7,    XXXX,  XXXX,  XXXX,  XXXX,  KC_F11,                        KC_F10,  XXXX,  XXXX,  XXXX,  XXXX,  KC_6,
         XXXX,    KC_F7,   KC_F5,   KC_F3,   KC_F1,   KC_F9,                         KC_F8,   KC_F12,  KC_F2,   KC_F4,   KC_F6,   XXXX,
                                             ____,    ____,    XXXX,        XXXX,    ____,     ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
@@ -126,81 +120,68 @@ const key_override_t *key_overrides[] = {
 	&ko_make_basic(MOD_MASK_SHIFT, KC_DOT,  KC_EXCLAIM),       // sft+. = !
 };
 
-const uint16_t PROGMEM both_shifts_chord[] = {OS_SFT, OS_SFT, COMBO_END};
+enum custom_keycodes {
+    OS_SFT = SAFE_RANGE,
+    OS_CTL,
+    OS_ALT,
+    OS_GUI,
+};
+const uint16_t PROGMEM sft_combo[] = {KC_C, KC_P, COMBO_END}; // top left
+const uint16_t PROGMEM ctl_combo[] = {KC_Y, KC_J, COMBO_END}; // top right
+const uint16_t PROGMEM alt_combo[] = {KC_M, KC_D, COMBO_END}; // bottom left
+const uint16_t PROGMEM gui_combo[] = {KC_F, KC_DOT, COMBO_END}; // bottom right
 combo_t key_combos[] = {
-    COMBO(both_shifts_chord, QK_CAPS_WORD_TOGGLE),
+    COMBO(sft_combo, OS_SFT),
+    COMBO(ctl_combo, OS_CTL),
+    COMBO(alt_combo, OS_ALT),
+    COMBO(gui_combo, OS_GUI),
 };
 
-#ifdef ENCODER_MAP_ENABLE
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-  [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(RM_VALD, RM_VALU), ENCODER_CCW_CW(KC_RGHT, KC_LEFT), },
-  [1] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(RM_VALD, RM_VALU), ENCODER_CCW_CW(KC_RGHT, KC_LEFT), },
-  [2] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(RM_VALD, RM_VALU), ENCODER_CCW_CW(KC_RGHT, KC_LEFT), },
-  [3] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(RM_VALD, RM_VALU), ENCODER_CCW_CW(KC_RGHT, KC_LEFT), },
-};
-#endif
+static uint16_t os_timer = 0;
+static uint16_t os_counter = 0;
+static uint16_t last_os_keycode = 0;
 
-static uint16_t mod_tap_pending = 0;
-static uint16_t locked_mods = 0;
-static uint16_t tap_dance_keycode = 0;
-static uint8_t  tap_dance_count = 0;
-static uint16_t tap_dance_timer = 0;
+// process_custom_oneshot is like OSM() but compatable with COMBO().
+// COMBO() has a bug preventing ONESHOT_TAP_TOGGLE from triggering.
+void process_custom_oneshot(uint16_t keycode, uint8_t mod_to_apply) {
+    // Toggle locked oneshot will unlock
+    if (get_oneshot_locked_mods() & mod_to_apply) {
+        clear_oneshot_locked_mods();
+        unregister_mods(mod_to_apply);
+        os_counter = 0;
+        last_os_keycode = 0;
+        os_timer = 0;
+        return;
+    }
+    // Subsequent taps on same mod may trigger lock
+    if(last_os_keycode == keycode && !timer_expired(os_timer, TAPPING_TERM)) {
+        if (++os_counter >= ONESHOT_TAP_TOGGLE) {
+            set_oneshot_locked_mods(mod_to_apply);
+        }
+        return;
+    }
+    os_counter = 0;
+    last_os_keycode = keycode;
+    os_timer = timer_read();
+    set_oneshot_mods(mod_to_apply);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // key pressed while mod-tap pending cancells the tap
-    if (record->event.pressed && mod_tap_pending) {
-        mod_tap_pending = 0;
+    if (record->event.pressed) { // on keydown
+      switch (keycode) {
+        case OS_SFT:
+          process_custom_oneshot(keycode, MOD_LSFT);
+          return false;
+        case OS_CTL:
+          process_custom_oneshot(keycode, MOD_LCTL);
+          return false;
+        case OS_ALT:
+          process_custom_oneshot(keycode, MOD_LALT);
+          return false;
+        case OS_GUI:
+          process_custom_oneshot(keycode, MOD_LGUI);
+          return false;
+      }
     }
-
-    uint8_t mod_bit = 0;
-    switch (keycode) {
-        case OS_GUI: mod_bit = MOD_BIT(KC_LGUI); break;
-        case OS_ALT: mod_bit = MOD_BIT(KC_LALT); break;
-        case OS_CTL: mod_bit = MOD_BIT(KC_LCTL); break;
-        case OS_SFT: mod_bit = MOD_BIT(KC_LSFT); break;
-        default:
-            tap_dance_count = 0;
-            return true; // nothing to see here
-    }
-
-    // Unlocking a currently locked modifier
-    if (locked_mods & mod_bit) {
-        if (record->event.pressed) {
-            unregister_mods(mod_bit); // Temporarily unregister for this keypress.
-        } else {
-            locked_mods &= ~mod_bit; // On release, permanently unlock the modifier.
-            tap_dance_count = 0;     // Reset counter.
-        }
-        return false;
-    }
-
-    if (record->event.pressed) { // Keydown
-        // keydown: register mod and track pending tap
-        register_mods(mod_bit);
-        mod_tap_pending = keycode;
-    } else { // keyup
-        unregister_mods(mod_bit);
-        if (mod_tap_pending == keycode) { // tapped key
-            // Check tap-toggle locking
-            if (timer_elapsed(tap_dance_timer) > TAPPING_TERM || tap_dance_keycode != keycode) {
-                // reset count when timer expiration or different key tapped
-                tap_dance_count = 1;
-            } else {
-                tap_dance_count++;
-            }
-
-            tap_dance_keycode = keycode;
-            tap_dance_timer = timer_read();
-
-            if (tap_dance_count >= ONESHOT_TAP_TOGGLE) {
-                // lock modifier
-                locked_mods |= mod_bit;
-                register_mods(mod_bit); // Keep it registered.
-                tap_dance_count = 0;    // Reset counter.
-            } else {
-                // regular one-shot tap
-                set_oneshot_mods(mod_bit);
-            }
-        }
-    }
-    return false; // keycode handled
+    return true; // passthrough
 }

@@ -45,7 +45,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //         ╭─────────────────╮          ╭─────────────────╮
 // ╭───────╯  5   3   1   9  │          │  8   0   2   4  ╰───────╮
 // │  7  gui alt ctl sft F11 │          │ F10 sft ctl alt gui  6  │ gui+0 = reset term font
-// ╰───╮  F7  F5  F3  F1  F9 ╰───╮  ╭───╯  F8 F12  F2  F4 F6  ╭───╯ sft+sft = Capsword
+// ╰───╮  F7  F5  F3  F1  F9 ╰───╮  ╭───╯  F8 F12  F2  F4  F6 ╭───╯ sft+sft = Capsword
 //     ╰───────────╮        [nav]│  │[sym]        ╭───────────╯
 //                 ╰─────────────╯  ╰─────────────╯
 //
@@ -73,9 +73,19 @@ enum layers {
 #define ____ KC_TRNS     // Transparent
 #define XXXX KC_NO       // NOOP
 #define KC_REDO KC_AGIN  // Pairs with UNDO
-#define OSL_NAV MO(L_NAV)
-#define OSL_SYM MO(L_SYM)
-#define OSL_NUM MO(L_NUM)
+#define MO_NAV MO(L_NAV)
+#define MO_SYM MO(L_SYM)
+#define MO_NUM MO(L_NUM)
+
+// GACS home row mod shorthands
+#define OS_LGUI OSM(MOD_LGUI)
+#define OS_LALT OSM(MOD_LALT)
+#define OS_LCTL OSM(MOD_LCTL)
+#define OS_LSFT OSM(MOD_LSFT)
+#define OS_RSFT OSM(MOD_RSFT)
+#define OS_RCTL OSM(MOD_RCTL)
+#define OS_RALT OSM(MOD_RALT)
+#define OS_RGUI OSM(MOD_RGUI)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_BASE] = LAYOUT_split_3x6_3(
@@ -83,29 +93,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXX,    KC_Q,    KC_C,    KC_H,    KC_P,    KC_V,                          KC_K,    KC_Y,    KC_O,    KC_J,    KC_QUOT, XXXX,
         KC_Q,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,                          KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    KC_QUOT,
         XXXX,    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,                          KC_Z,    KC_F,    KC_COMM, KC_DOT,  KC_MINS, XXXX,
-                                            XXXX,    KC_SPC,  OSL_NAV,     OSL_SYM, KC_ESC,  XXXX
+                                            XXXX,    KC_SPC,  MO_NAV,      MO_SYM,  KC_ESC,  OS_RSFT
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_NAV] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    MS_BTN2, MS_BTN1, KC_MPLY, XXXX,                          XXXX,    KC_END,  KC_HOME, KC_BSPC, XXXX,    XXXX,
-        XXXX,    XXXX,  XXXX,  XXXX,  XXXX,  MS_BTN3,                        KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT, KC_ENT,  XXXX,   
+        XXXX,    OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, MS_BTN3,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_ENT,  XXXX,   
         XXXX,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXX,                          XXXX,    KC_PGDN, KC_PGUP, KC_TAB,  XXXX,    XXXX,
-                                            ____,    ____,    XXXX,        OSL_NUM, ____,    ____
+                                            ____,    ____,    XXXX,        MO_NUM, ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_SYM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_LT,   KC_GT,   KC_MINS, KC_GRV,                        KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, KC_DLR,  XXXX,
-        KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_PIPE, XXXX,  XXXX,  XXXX,  XXXX,  KC_DLR,
+        KC_COLN, KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_AMPR,                       KC_PIPE, OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI,  KC_DLR,
         XXXX,    KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_PERC,                       KC_BSLS, KC_HASH, KC_LCBR, KC_RCBR, KC_AT,   XXXX,
-                                            ____,    ____,    OSL_NUM,     XXXX,    ____,    ____
+                                            ____,    ____,    MO_NUM,      XXXX,    ____,    ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
   ),
   [L_NUM] = LAYOUT_split_3x6_3(
     // +--------+--------+--------+--------+--------+--------+                     +--------+--------+--------+--------+--------+--------+
         XXXX,    XXXX,    KC_5,    KC_3,    KC_1,    KC_9,                          KC_8,    KC_0,    KC_2,    KC_4,    XXXX,    XXXX,
-        KC_7,    XXXX,  XXXX,  XXXX,  XXXX,  KC_F11,                        KC_F10,  XXXX,  XXXX,  XXXX,  XXXX,  KC_6,
+        KC_7,    OS_LGUI, OS_LALT, OS_LCTL, OS_LSFT, KC_F11,                        KC_F10,  OS_RSFT, OS_RCTL, OS_LALT, OS_RGUI, KC_6,
         XXXX,    KC_F7,   KC_F5,   KC_F3,   KC_F1,   KC_F9,                         KC_F8,   KC_F12,  KC_F2,   KC_F4,   KC_F6,   XXXX,
                                             ____,    ____,    XXXX,        XXXX,    ____,     ____
     //                                     +--------+--------+--------+   +--------+--------+--------+
@@ -120,68 +130,7 @@ const key_override_t *key_overrides[] = {
 	&ko_make_basic(MOD_MASK_SHIFT, KC_DOT,  KC_EXCLAIM),       // sft+. = !
 };
 
-enum custom_keycodes {
-    OS_SFT = SAFE_RANGE,
-    OS_CTL,
-    OS_ALT,
-    OS_GUI,
-};
-const uint16_t PROGMEM sft_combo[] = {KC_C, KC_P, COMBO_END}; // top left
-const uint16_t PROGMEM ctl_combo[] = {KC_Y, KC_J, COMBO_END}; // top right
-const uint16_t PROGMEM alt_combo[] = {KC_M, KC_D, COMBO_END}; // bottom left
-const uint16_t PROGMEM gui_combo[] = {KC_F, KC_DOT, COMBO_END}; // bottom right
+const uint16_t PROGMEM both_shifts_chord[] = {OS_LSFT, OS_RSFT, COMBO_END};
 combo_t key_combos[] = {
-    COMBO(sft_combo, OS_SFT),
-    COMBO(ctl_combo, OS_CTL),
-    COMBO(alt_combo, OS_ALT),
-    COMBO(gui_combo, OS_GUI),
+    COMBO(both_shifts_chord, QK_CAPS_WORD_TOGGLE),
 };
-
-static uint16_t os_timer = 0;
-static uint16_t os_counter = 0;
-static uint16_t last_os_keycode = 0;
-
-// process_custom_oneshot is like OSM() but compatable with COMBO().
-// COMBO() has a bug preventing ONESHOT_TAP_TOGGLE from triggering.
-void process_custom_oneshot(uint16_t keycode, uint8_t mod_to_apply) {
-    // Toggle locked oneshot will unlock
-    if (get_oneshot_locked_mods() & mod_to_apply) {
-        clear_oneshot_locked_mods();
-        unregister_mods(mod_to_apply);
-        os_counter = 0;
-        last_os_keycode = 0;
-        os_timer = 0;
-        return;
-    }
-    // Subsequent taps on same mod may trigger lock
-    if(last_os_keycode == keycode && !timer_expired(os_timer, TAPPING_TERM)) {
-        if (++os_counter >= ONESHOT_TAP_TOGGLE) {
-            set_oneshot_locked_mods(mod_to_apply);
-        }
-        return;
-    }
-    os_counter = 0;
-    last_os_keycode = keycode;
-    os_timer = timer_read();
-    set_oneshot_mods(mod_to_apply);
-}
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) { // on keydown
-      switch (keycode) {
-        case OS_SFT:
-          process_custom_oneshot(keycode, MOD_LSFT);
-          return false;
-        case OS_CTL:
-          process_custom_oneshot(keycode, MOD_LCTL);
-          return false;
-        case OS_ALT:
-          process_custom_oneshot(keycode, MOD_LALT);
-          return false;
-        case OS_GUI:
-          process_custom_oneshot(keycode, MOD_LGUI);
-          return false;
-      }
-    }
-    return true; // passthrough
-}
